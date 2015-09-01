@@ -1,0 +1,59 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Required weight tons:</strong>
+  <%= @purchase_order.required_weight_tons %>
+</p>
+
+<p>
+  <strong>Required weight lbs:</strong>
+  <%= @purchase_order.required_weight_lbs %>
+</p>
+
+<p>
+  <strong>Remaining weight tons:</strong>
+  <%= @purchase_order.remaining_weight_tons %>
+</p>
+
+<p>
+  <strong>Remaining weight lbs:</strong>
+  <%= @purchase_order.remaining_weight_lbs %>
+</p>
+
+<p>
+  <strong>Vendor:</strong>
+  <%= @purchase_order.vendor %>
+</p>
+
+<p>
+  <strong>Well name:</strong>
+  <%= @purchase_order.well_name %>
+</p>
+
+<p>
+  <strong>Sand grade:</strong>
+  <%= @purchase_order.sand_grade %>
+</p>
+
+<p>
+  <strong>Start date:</strong>
+  <%= @purchase_order.start_date %>
+</p>
+
+<p>
+  <strong>Active:</strong>
+  <%= @purchase_order.active %>
+</p>
+
+<p>
+  <strong>Added by:</strong>
+  <%= @purchase_order.added_by %>
+</p>
+
+<p>
+  <strong>Changed by:</strong>
+  <%= @purchase_order.changed_by %>
+</p>
+
+<%= link_to 'Edit', edit_purchase_order_path(@purchase_order) %> |
+<%= link_to 'Back', purchase_orders_path %>

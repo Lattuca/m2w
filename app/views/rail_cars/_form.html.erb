@@ -1,0 +1,85 @@
+<%= form_for(@rail_car) do |f| %>
+  <% if @rail_car.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@rail_car.errors.count, "error") %> prohibited this rail_car from being saved:</h2>
+
+      <ul>
+      <% @rail_car.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :railcar_nbr %><br>
+    <%= f.text_field :railcar_nbr %>
+  </div>
+  <div class="field">
+    <%= f.label :wgt_on_arrival %><br>
+    <%= f.number_field :wgt_on_arrival %>
+  </div>
+  <div class="field">
+    <%= f.label :wgt_at_origin %><br>
+    <%= f.number_field :wgt_at_origin %>
+  </div>
+  <div class="field">
+    <%= f.label :sand_grade %><br>
+    <%= f.text_field :sand_grade %>
+  </div>
+  <div class="field">
+    <%= f.label :car_empty %><br>
+    <%= f.check_box :car_empty %>
+  </div>
+  <div class="field">
+    <%= f.label :bol_nbr %><br>
+    <%= f.number_field :bol_nbr %>
+  </div>
+  <div class="field">
+    <%= f.label :vendor_id %><br>
+    <%= f.text_field :vendor_id %>
+  </div>
+  <div class="field">
+    <%= f.label :vendor_po_nbr %><br>
+    <%= f.number_field :vendor_po_nbr %>
+  </div>
+  <div class="field">
+    <%= f.label :email_bol %><br>
+    <%= f.check_box :email_bol %>
+  </div>
+  <div class="field">
+    <%= f.label :purchaseorder_id %><br>
+    <%= f.text_field :purchaseorder_id %>
+  </div>
+  <div class="field">
+    <%= f.label :arrival_dt_elk_city %><br>
+    <%= f.date_select :arrival_dt_elk_city %>
+  </div>
+  <div class="field">
+    <%= f.label :arrival_dt_400_line %><br>
+    <%= f.date_select :arrival_dt_400_line %>
+  </div>
+  <div class="field">
+    <%= f.label :actual_dep_dt %><br>
+    <%= f.date_select :actual_dep_dt %>
+  </div>
+  <div class="field">
+    <%= f.label :arrival_dt_onsite %><br>
+    <%= f.date_select :arrival_dt_onsite %>
+  </div>
+  <div class="field">
+    <%= f.label :bol_arrival_dt %><br>
+    <%= f.date_select :bol_arrival_dt %>
+  </div>
+  <div class="field">
+    <%= f.label :added_by %><br>
+    <%= f.text_field :added_by %>
+  </div>
+  <div class="field">
+    <%= f.label :changed_by %><br>
+    <%= f.text_field :changed_by %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,9 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Access level:</strong>
+  <%= @user_access_level.access_level %>
+</p>
+
+<%= link_to 'Edit', edit_user_access_level_path(@user_access_level) %> |
+<%= link_to 'Back', user_access_levels_path %>

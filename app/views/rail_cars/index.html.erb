@@ -1,0 +1,59 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Rail Cars</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Railcar nbr</th>
+      <th>Wgt on arrival</th>
+      <th>Wgt at origin</th>
+      <th>Sand grade</th>
+      <th>Car empty</th>
+      <th>Bol nbr</th>
+      <th>Vendor</th>
+      <th>Vendor po nbr</th>
+      <th>Email bol</th>
+      <th>Purchaseorder</th>
+      <th>Arrival dt elk city</th>
+      <th>Arrival dt 400 line</th>
+      <th>Actual dep dt</th>
+      <th>Arrival dt onsite</th>
+      <th>Bol arrival dt</th>
+      <th>Added by</th>
+      <th>Changed by</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @rail_cars.each do |rail_car| %>
+      <tr>
+        <td><%= rail_car.railcar_nbr %></td>
+        <td><%= rail_car.wgt_on_arrival %></td>
+        <td><%= rail_car.wgt_at_origin %></td>
+        <td><%= rail_car.sand_grade %></td>
+        <td><%= rail_car.car_empty %></td>
+        <td><%= rail_car.bol_nbr %></td>
+        <td><%= rail_car.vendor %></td>
+        <td><%= rail_car.vendor_po_nbr %></td>
+        <td><%= rail_car.email_bol %></td>
+        <td><%= rail_car.purchaseorder %></td>
+        <td><%= rail_car.arrival_dt_elk_city %></td>
+        <td><%= rail_car.arrival_dt_400_line %></td>
+        <td><%= rail_car.actual_dep_dt %></td>
+        <td><%= rail_car.arrival_dt_onsite %></td>
+        <td><%= rail_car.bol_arrival_dt %></td>
+        <td><%= rail_car.added_by %></td>
+        <td><%= rail_car.changed_by %></td>
+        <td><%= link_to 'Show', rail_car %></td>
+        <td><%= link_to 'Edit', edit_rail_car_path(rail_car) %></td>
+        <td><%= link_to 'Destroy', rail_car, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Rail car', new_rail_car_path %>

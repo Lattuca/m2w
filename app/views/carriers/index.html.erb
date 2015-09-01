@@ -1,0 +1,55 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Carriers</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Carrier name</th>
+      <th>Address line 1</th>
+      <th>Address line 2</th>
+      <th>City name</th>
+      <th>State code</th>
+      <th>Zip code</th>
+      <th>Contact name1</th>
+      <th>Email1</th>
+      <th>Phone nbr1</th>
+      <th>Contact name2</th>
+      <th>Email2</th>
+      <th>Phone nbr2</th>
+      <th>Comments</th>
+      <th>Added by</th>
+      <th>Changed by</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @carriers.each do |carrier| %>
+      <tr>
+        <td><%= carrier.carrier_name %></td>
+        <td><%= carrier.address_line_1 %></td>
+        <td><%= carrier.address_line_2 %></td>
+        <td><%= carrier.city_name %></td>
+        <td><%= carrier.state_code %></td>
+        <td><%= carrier.zip_code %></td>
+        <td><%= carrier.contact_name1 %></td>
+        <td><%= carrier.email1 %></td>
+        <td><%= carrier.phone_nbr1 %></td>
+        <td><%= carrier.contact_name2 %></td>
+        <td><%= carrier.email2 %></td>
+        <td><%= carrier.phone_nbr2 %></td>
+        <td><%= carrier.comments %></td>
+        <td><%= carrier.added_by %></td>
+        <td><%= carrier.changed_by %></td>
+        <td><%= link_to 'Show', carrier %></td>
+        <td><%= link_to 'Edit', edit_carrier_path(carrier) %></td>
+        <td><%= link_to 'Destroy', carrier, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Carrier', new_carrier_path %>

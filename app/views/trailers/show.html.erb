@@ -1,0 +1,79 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Trailer nbr:</strong>
+  <%= @trailer.trailer_nbr %>
+</p>
+
+<p>
+  <strong>Driver name:</strong>
+  <%= @trailer.driver_name %>
+</p>
+
+<p>
+  <strong>Carrier name:</strong>
+  <%= @trailer.carrier_name %>
+</p>
+
+<p>
+  <strong>Date shipped:</strong>
+  <%= @trailer.date_shipped %>
+</p>
+
+<p>
+  <strong>Bol nbr:</strong>
+  <%= @trailer.bol_nbr %>
+</p>
+
+<p>
+  <strong>Time in:</strong>
+  <%= @trailer.time_in %>
+</p>
+
+<p>
+  <strong>Time out:</strong>
+  <%= @trailer.time_out %>
+</p>
+
+<p>
+  <strong>Time taken number:</strong>
+  <%= @trailer.time_taken_number %>
+</p>
+
+<p>
+  <strong>Railcar nbr:</strong>
+  <%= @trailer.railcar_nbr %>
+</p>
+
+<p>
+  <strong>Worker:</strong>
+  <%= @trailer.worker %>
+</p>
+
+<p>
+  <strong>Weight lbs:</strong>
+  <%= @trailer.weight_lbs %>
+</p>
+
+<p>
+  <strong>Weight tons:</strong>
+  <%= @trailer.weight_tons %>
+</p>
+
+<p>
+  <strong>Purchaseorder:</strong>
+  <%= @trailer.purchaseorder %>
+</p>
+
+<p>
+  <strong>Added by:</strong>
+  <%= @trailer.added_by %>
+</p>
+
+<p>
+  <strong>Changed by:</strong>
+  <%= @trailer.changed_by %>
+</p>
+
+<%= link_to 'Edit', edit_trailer_path(@trailer) %> |
+<%= link_to 'Back', trailers_path %>

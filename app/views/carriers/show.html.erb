@@ -1,0 +1,79 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Carrier name:</strong>
+  <%= @carrier.carrier_name %>
+</p>
+
+<p>
+  <strong>Address line 1:</strong>
+  <%= @carrier.address_line_1 %>
+</p>
+
+<p>
+  <strong>Address line 2:</strong>
+  <%= @carrier.address_line_2 %>
+</p>
+
+<p>
+  <strong>City name:</strong>
+  <%= @carrier.city_name %>
+</p>
+
+<p>
+  <strong>State code:</strong>
+  <%= @carrier.state_code %>
+</p>
+
+<p>
+  <strong>Zip code:</strong>
+  <%= @carrier.zip_code %>
+</p>
+
+<p>
+  <strong>Contact name1:</strong>
+  <%= @carrier.contact_name1 %>
+</p>
+
+<p>
+  <strong>Email1:</strong>
+  <%= @carrier.email1 %>
+</p>
+
+<p>
+  <strong>Phone nbr1:</strong>
+  <%= @carrier.phone_nbr1 %>
+</p>
+
+<p>
+  <strong>Contact name2:</strong>
+  <%= @carrier.contact_name2 %>
+</p>
+
+<p>
+  <strong>Email2:</strong>
+  <%= @carrier.email2 %>
+</p>
+
+<p>
+  <strong>Phone nbr2:</strong>
+  <%= @carrier.phone_nbr2 %>
+</p>
+
+<p>
+  <strong>Comments:</strong>
+  <%= @carrier.comments %>
+</p>
+
+<p>
+  <strong>Added by:</strong>
+  <%= @carrier.added_by %>
+</p>
+
+<p>
+  <strong>Changed by:</strong>
+  <%= @carrier.changed_by %>
+</p>
+
+<%= link_to 'Edit', edit_carrier_path(@carrier) %> |
+<%= link_to 'Back', carriers_path %>

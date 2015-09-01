@@ -1,0 +1,39 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  railcar_nbr: MyString
+  wgt_on_arrival: 1
+  wgt_at_origin: 1
+  sand_grade: MyString
+  car_empty: false
+  bol_nbr: 1
+  vendor_id: 
+  vendor_po_nbr: 1
+  email_bol: false
+  purchaseorder_id: 
+  arrival_dt_elk_city: 2015-08-31
+  arrival_dt_400_line: 2015-08-31
+  actual_dep_dt: 2015-08-31
+  arrival_dt_onsite: 2015-08-31
+  bol_arrival_dt: 2015-08-31
+  added_by: MyString
+  changed_by: MyString
+
+two:
+  railcar_nbr: MyString
+  wgt_on_arrival: 1
+  wgt_at_origin: 1
+  sand_grade: MyString
+  car_empty: false
+  bol_nbr: 1
+  vendor_id: 
+  vendor_po_nbr: 1
+  email_bol: false
+  purchaseorder_id: 
+  arrival_dt_elk_city: 2015-08-31
+  arrival_dt_400_line: 2015-08-31
+  actual_dep_dt: 2015-08-31
+  arrival_dt_onsite: 2015-08-31
+  bol_arrival_dt: 2015-08-31
+  added_by: MyString
+  changed_by: MyString

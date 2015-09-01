@@ -1,0 +1,79 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Vendor name:</strong>
+  <%= @vendor.vendor_name %>
+</p>
+
+<p>
+  <strong>Address line 1:</strong>
+  <%= @vendor.address_line_1 %>
+</p>
+
+<p>
+  <strong>Address line 2:</strong>
+  <%= @vendor.address_line_2 %>
+</p>
+
+<p>
+  <strong>City name:</strong>
+  <%= @vendor.city_name %>
+</p>
+
+<p>
+  <strong>State code:</strong>
+  <%= @vendor.state_code %>
+</p>
+
+<p>
+  <strong>Zip code:</strong>
+  <%= @vendor.zip_code %>
+</p>
+
+<p>
+  <strong>Contact name1:</strong>
+  <%= @vendor.contact_name1 %>
+</p>
+
+<p>
+  <strong>Email1:</strong>
+  <%= @vendor.email1 %>
+</p>
+
+<p>
+  <strong>Phone nbr1:</strong>
+  <%= @vendor.phone_nbr1 %>
+</p>
+
+<p>
+  <strong>Contact name2:</strong>
+  <%= @vendor.contact_name2 %>
+</p>
+
+<p>
+  <strong>Email2:</strong>
+  <%= @vendor.email2 %>
+</p>
+
+<p>
+  <strong>Phone nbr2:</strong>
+  <%= @vendor.phone_nbr2 %>
+</p>
+
+<p>
+  <strong>Comments:</strong>
+  <%= @vendor.comments %>
+</p>
+
+<p>
+  <strong>Added by:</strong>
+  <%= @vendor.added_by %>
+</p>
+
+<p>
+  <strong>Changed by:</strong>
+  <%= @vendor.changed_by %>
+</p>
+
+<%= link_to 'Edit', edit_vendor_path(@vendor) %> |
+<%= link_to 'Back', vendors_path %>

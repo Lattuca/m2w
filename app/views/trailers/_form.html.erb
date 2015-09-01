@@ -1,0 +1,77 @@
+<%= form_for(@trailer) do |f| %>
+  <% if @trailer.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@trailer.errors.count, "error") %> prohibited this trailer from being saved:</h2>
+
+      <ul>
+      <% @trailer.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :trailer_nbr %><br>
+    <%= f.text_field :trailer_nbr %>
+  </div>
+  <div class="field">
+    <%= f.label :driver_name %><br>
+    <%= f.text_field :driver_name %>
+  </div>
+  <div class="field">
+    <%= f.label :carrier_name %><br>
+    <%= f.number_field :carrier_name %>
+  </div>
+  <div class="field">
+    <%= f.label :date_shipped %><br>
+    <%= f.date_select :date_shipped %>
+  </div>
+  <div class="field">
+    <%= f.label :bol_nbr %><br>
+    <%= f.number_field :bol_nbr %>
+  </div>
+  <div class="field">
+    <%= f.label :time_in %><br>
+    <%= f.date_select :time_in %>
+  </div>
+  <div class="field">
+    <%= f.label :time_out %><br>
+    <%= f.date_select :time_out %>
+  </div>
+  <div class="field">
+    <%= f.label :time_taken_number %><br>
+    <%= f.text_field :time_taken_number %>
+  </div>
+  <div class="field">
+    <%= f.label :railcar_nbr %><br>
+    <%= f.text_field :railcar_nbr %>
+  </div>
+  <div class="field">
+    <%= f.label :worker %><br>
+    <%= f.text_field :worker %>
+  </div>
+  <div class="field">
+    <%= f.label :weight_lbs %><br>
+    <%= f.number_field :weight_lbs %>
+  </div>
+  <div class="field">
+    <%= f.label :weight_tons %><br>
+    <%= f.number_field :weight_tons %>
+  </div>
+  <div class="field">
+    <%= f.label :purchaseorder_id %><br>
+    <%= f.text_field :purchaseorder_id %>
+  </div>
+  <div class="field">
+    <%= f.label :added_by %><br>
+    <%= f.text_field :added_by %>
+  </div>
+  <div class="field">
+    <%= f.label :changed_by %><br>
+    <%= f.text_field :changed_by %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

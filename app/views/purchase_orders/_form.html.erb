@@ -1,0 +1,61 @@
+<%= form_for(@purchase_order) do |f| %>
+  <% if @purchase_order.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@purchase_order.errors.count, "error") %> prohibited this purchase_order from being saved:</h2>
+
+      <ul>
+      <% @purchase_order.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :required_weight_tons %><br>
+    <%= f.number_field :required_weight_tons %>
+  </div>
+  <div class="field">
+    <%= f.label :required_weight_lbs %><br>
+    <%= f.number_field :required_weight_lbs %>
+  </div>
+  <div class="field">
+    <%= f.label :remaining_weight_tons %><br>
+    <%= f.number_field :remaining_weight_tons %>
+  </div>
+  <div class="field">
+    <%= f.label :remaining_weight_lbs %><br>
+    <%= f.number_field :remaining_weight_lbs %>
+  </div>
+  <div class="field">
+    <%= f.label :vendor_id %><br>
+    <%= f.text_field :vendor_id %>
+  </div>
+  <div class="field">
+    <%= f.label :well_name %><br>
+    <%= f.text_field :well_name %>
+  </div>
+  <div class="field">
+    <%= f.label :sand_grade %><br>
+    <%= f.text_field :sand_grade %>
+  </div>
+  <div class="field">
+    <%= f.label :start_date %><br>
+    <%= f.date_select :start_date %>
+  </div>
+  <div class="field">
+    <%= f.label :active %><br>
+    <%= f.check_box :active %>
+  </div>
+  <div class="field">
+    <%= f.label :added_by %><br>
+    <%= f.text_field :added_by %>
+  </div>
+  <div class="field">
+    <%= f.label :changed_by %><br>
+    <%= f.text_field :changed_by %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

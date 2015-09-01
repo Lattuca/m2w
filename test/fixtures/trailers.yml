@@ -1,0 +1,35 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  trailer_nbr: MyString
+  driver_name: MyString
+  carrier_name: 1
+  date_shipped: 2015-08-31
+  bol_nbr: 1
+  time_in: 2015-08-31
+  time_out: 2015-08-31
+  time_taken_number: MyString
+  railcar_nbr: MyString
+  worker: MyString
+  weight_lbs: 1
+  weight_tons: 1
+  purchaseorder_id: 
+  added_by: MyString
+  changed_by: MyString
+
+two:
+  trailer_nbr: MyString
+  driver_name: MyString
+  carrier_name: 1
+  date_shipped: 2015-08-31
+  bol_nbr: 1
+  time_in: 2015-08-31
+  time_out: 2015-08-31
+  time_taken_number: MyString
+  railcar_nbr: MyString
+  worker: MyString
+  weight_lbs: 1
+  weight_tons: 1
+  purchaseorder_id: 
+  added_by: MyString
+  changed_by: MyString

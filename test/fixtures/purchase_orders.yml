@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  required_weight_tons: 1
+  required_weight_lbs: 1
+  remaining_weight_tons: 1
+  remaining_weight_lbs: 1
+  vendor_id: 
+  well_name: MyString
+  sand_grade: MyString
+  start_date: 2015-08-31
+  active: false
+  added_by: MyString
+  changed_by: MyString
+
+two:
+  required_weight_tons: 1
+  required_weight_lbs: 1
+  remaining_weight_tons: 1
+  remaining_weight_lbs: 1
+  vendor_id: 
+  well_name: MyString
+  sand_grade: MyString
+  start_date: 2015-08-31
+  active: false
+  added_by: MyString
+  changed_by: MyString

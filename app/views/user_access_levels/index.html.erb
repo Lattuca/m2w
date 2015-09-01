@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing User Access Levels</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Access level</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @user_access_levels.each do |user_access_level| %>
+      <tr>
+        <td><%= user_access_level.access_level %></td>
+        <td><%= link_to 'Show', user_access_level %></td>
+        <td><%= link_to 'Edit', edit_user_access_level_path(user_access_level) %></td>
+        <td><%= link_to 'Destroy', user_access_level, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New User access level', new_user_access_level_path %>
