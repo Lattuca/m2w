@@ -1,0 +1,6 @@
+<%= form_tag( purchase_order_connect_path, method: 'post') do %>
+  <%= hidden_field_tag(:purchase_order_id, @purchase_order_id) %>
+  Choose Vendor:
+  <%= select_tag(:vendor_id, options_for_select(@vendors)) %>
+  <%= submit_tag("Select") %>
+<% end %>
