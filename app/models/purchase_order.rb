@@ -1,3 +1,3 @@
 class PurchaseOrder < ActiveRecord::Base
-  has_and_belongs_to_many :vendor
+  belongs_to :vendor
 end
