@@ -13,9 +13,6 @@
 
 ActiveRecord::Schema.define(version: 20150901034651) do
 
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-
   create_table "carriers", force: :cascade do |t|
     t.string   "carrier_name"
     t.string   "address_line_1"
@@ -52,7 +49,8 @@ ActiveRecord::Schema.define(version: 20150901034651) do
     t.datetime "updated_at",            null: false
   end
 
-  add_index "purchase_orders", ["vendor_id"], name: "index_purchase_orders_on_vendor_id", using: :btree
+  add_index "purchase_orders", ["vendor_id"], name: "index_purchase_orders_on_vendor_id"
+
 
   create_table "rail_cars", force: :cascade do |t|
     t.string   "railcar_nbr"
@@ -65,7 +63,7 @@ ActiveRecord::Schema.define(version: 20150901034651) do
     t.integer  "vendor_po_nbr"
     t.boolean  "email_bol"
     t.integer  "purchaseorder_id"
-    t.date     "arrival_dt_elk_city"
+    t.date     "arrival_dt_elk_city"\
     t.date     "arrival_dt_400_line"
     t.date     "actual_dep_dt"
     t.date     "arrival_dt_onsite"
@@ -76,8 +74,8 @@ ActiveRecord::Schema.define(version: 20150901034651) do
     t.datetime "updated_at",          null: false
   end
 
-  add_index "rail_cars", ["purchaseorder_id"], name: "index_rail_cars_on_purchaseorder_id", using: :btree
-  add_index "rail_cars", ["vendor_id"], name: "index_rail_cars_on_vendor_id", using: :btree
+  add_index "rail_cars", ["purchaseorder_id"], name: "index_rail_cars_on_purchaseorder_id"
+  add_index "rail_cars", ["vendor_id"], name: "index_rail_cars_on_vendor_id"
 
   create_table "trailers", force: :cascade do |t|
     t.string   "trailer_nbr"
@@ -99,7 +97,7 @@ ActiveRecord::Schema.define(version: 20150901034651) do
     t.datetime "updated_at",        null: false
   end
 
-  add_index "trailers", ["purchaseorder_id"], name: "index_trailers_on_purchaseorder_id", using: :btree
+  add_index "trailers", ["purchaseorder_id"], name: "index_trailers_on_purchaseorder_id"
 
   create_table "user_access_levels", force: :cascade do |t|
     t.string   "access_level"
