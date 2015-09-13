@@ -15,16 +15,19 @@ class PurchaseOrdersController < ApplicationController
   # GET /purchase_orders/new
   def new
     @purchase_order = PurchaseOrder.new
+    @vendors = Vendor.list_for_select
   end
 
   # GET /purchase_orders/1/edit
   def edit
+    @vendors = Vendor.list_for_select
   end
 
   # POST /purchase_orders
   # POST /purchase_orders.json
   def create
     @purchase_order = PurchaseOrder.new(purchase_order_params)
+    @vendors = Vendor.list_for_select
 
     respond_to do |format|
       if @purchase_order.save
@@ -60,11 +63,19 @@ class PurchaseOrdersController < ApplicationController
       format.json { head :no_content }
     end
   end
-    
+
   def connect
-    fail
+    purchase_order = PurchaseOrder.find(params[:id])
+    vendor = Vendor.find(params[:vendor_id])
+    purchase_order.vendor = vendor
+    purchase_order.save
+    redirect_to purchase_order_path(purchase_order)
   end
 
+  #def select
+  #  @purchase_order_id = params[:id]
+  #  @vendors = Vendor.find(pramas[:id])
+  #end
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_purchase_order

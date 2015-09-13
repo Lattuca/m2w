@@ -28,8 +28,8 @@
     <%= f.number_field :remaining_weight_lbs %>
   </div>
   <div class="field">
-    <%= f.label :vendor_id %><br>
-    <%= f.number_field :vendor_id %>
+    <%= f.label :vendor %><br>
+    <%= f.select(:vendor_id, options_for_select(vendors)) %>
   </div>
   <div class="field">
     <%= f.label :well_name %><br>

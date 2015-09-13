@@ -62,8 +62,8 @@ class VendorsController < ApplicationController
   end
 
   def select
-    @purchase_orders_id = params[:id]
-    @vendors = Vendor.all.map { |vendor| [vendor.vendor_name, vendor.id]}
+    @purchase_order_id = params[:id]
+    @vendors = Vendor.list_for_select
   end
 
   private
