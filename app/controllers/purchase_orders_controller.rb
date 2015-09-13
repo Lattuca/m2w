@@ -1,4 +1,6 @@
 class PurchaseOrdersController < ApplicationController
+
+  before_action :authorize
   before_action :set_purchase_order, only: [:show, :edit, :update, :destroy]
 
   # GET /purchase_orders

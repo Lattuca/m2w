@@ -1,4 +1,5 @@
 class TrailersController < ApplicationController
+  before_action :authorize
   before_action :set_trailer, only: [:show, :edit, :update, :destroy]
 
   # GET /trailers

@@ -1,4 +1,5 @@
 class VendorsController < ApplicationController
+  before_action :authorize
   before_action :set_vendor, only: [:show, :edit, :update, :destroy]
 
   # GET /vendors

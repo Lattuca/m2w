@@ -1,4 +1,5 @@
 class RailCarsController < ApplicationController
+  before_action :authorize
   before_action :set_rail_car, only: [:show, :edit, :update, :destroy]
 
   # GET /rail_cars

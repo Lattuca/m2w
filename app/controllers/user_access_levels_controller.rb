@@ -1,4 +1,5 @@
 class UserAccessLevelsController < ApplicationController
+  before_action :authorize
   before_action :set_user_access_level, only: [:show, :edit, :update, :destroy]
 
   # GET /user_access_levels

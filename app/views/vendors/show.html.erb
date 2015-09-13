@@ -75,5 +75,14 @@
   <%= @vendor.changed_by %>
 </p>
 
+<p>
+  <strong>Purchase Orders:</strong>
+  <% @vendor.purchase_orders.each do |purchase_order| %>
+    <p>
+      Purchase Order No: <%= purchase_order.id %> <br/>
+    </p>
+    <% end %>
+  </p>
+
 <%= link_to 'Edit', edit_vendor_path(@vendor) %> |
 <%= link_to 'Back', vendors_path %>
