@@ -37,8 +37,8 @@
   </div>
   <div class="field">
     <%= f.label :sand_grade %><br>
-    <%= f.text_field :sand_grade %>
-  </div>
+    <%= f.select :sand_grade, ['40/70m', '100m']%>
+    </div>
   <div class="field">
     <%= f.label :start_date %><br>
     <%= f.date_select :start_date %>
