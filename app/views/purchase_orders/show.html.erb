@@ -2,6 +2,10 @@
 
 <p><strong> Purchase Order Page </strong>
 
+  <p>
+    <strong>PO Number:</strong>
+      <%=@purchase_order.po_nbr %>
+  </p>
 <p>
   <strong>Required weight tons:</strong>
   <%= @purchase_order.required_weight_tons %>
@@ -58,6 +62,8 @@
   <strong>Changed by:</strong>
   <%= @purchase_order.changed_by %>
 </p>
+
+
 
 <%= link_to 'Edit', edit_purchase_order_path(@purchase_order) %> |
 <%= link_to 'Back', purchase_orders_path %>

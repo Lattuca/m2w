@@ -7,7 +7,8 @@ class SessionsController < ApplicationController
 
   def create
       user = User.find_by(login: params[:login])
-      if user and user.authenticate(params[:password])
+      puts :login
+      if (user and user.authenticate(params[:password]))
         session[:user_id] = user.id
         redirect_to m2w_path
       else

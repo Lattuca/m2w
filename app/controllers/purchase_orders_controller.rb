@@ -45,6 +45,7 @@ class PurchaseOrdersController < ApplicationController
   # PATCH/PUT /purchase_orders/1
   # PATCH/PUT /purchase_orders/1.json
   def update
+    @vendors = Vendor.list_for_select
     respond_to do |format|
       if @purchase_order.update(purchase_order_params)
         format.html { redirect_to @purchase_order, notice: 'Purchase order was successfully updated.' }
@@ -86,6 +87,6 @@ class PurchaseOrdersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def purchase_order_params
-      params.require(:purchase_order).permit(:required_weight_tons, :required_weight_lbs, :remaining_weight_tons, :remaining_weight_lbs, :vendor_id, :well_name, :sand_grade, :start_date, :active, :added_by, :changed_by)
+      params.require(:purchase_order).permit(:required_weight_tons, :required_weight_lbs, :remaining_weight_tons, :remaining_weight_lbs, :vendor_id, :well_name, :sand_grade, :start_date, :active, :added_by, :changed_by, :po_nbr)
     end
 end

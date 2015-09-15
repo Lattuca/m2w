@@ -12,6 +12,10 @@
   <% end %>
 
   <div class="field">
+    <%=f.label :po_nbr %>
+    <%=f.number_field :po_nbr %><br>
+  </div>
+  <div class="field">
     <%= f.label :required_weight_tons %><br>
     <%= f.number_field :required_weight_tons %>
   </div>
@@ -55,6 +59,7 @@
     <%= f.label :changed_by %><br>
     <%= f.text_field :changed_by %>
   </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>
