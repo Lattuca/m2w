@@ -25,6 +25,7 @@ class PurchaseOrdersController < ApplicationController
     @vendors = Vendor.list_for_select
   end
 
+
   # POST /purchase_orders
   # POST /purchase_orders.json
   def create
@@ -75,10 +76,7 @@ class PurchaseOrdersController < ApplicationController
     redirect_to purchase_order_path(purchase_order)
   end
 
-  #def select
-  #  @purchase_order_id = params[:id]
-  #  @vendors = Vendor.find(pramas[:id])
-  #end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_purchase_order

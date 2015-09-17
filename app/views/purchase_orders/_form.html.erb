@@ -12,23 +12,23 @@
   <% end %>
 
   <div class="field">
-    <%=f.label :po_nbr %>
+    <%=f.label :po_nbr, "PO \#" %>
     <%=f.number_field :po_nbr %><br>
   </div>
   <div class="field">
-    <%= f.label :required_weight_tons %><br>
-    <%= f.number_field :required_weight_tons %>
+    <%= f.label :required_weight_tons, "Required Weight Tons" %><br>
+    <%= f.text_field :required_weight_tons, :class => 'required_weight_tons', :value => (number_with_precision(f.object.required_weight_tons, :precision => 2) || 0) %>
   </div>
   <div class="field">
-    <%= f.label :required_weight_lbs %><br>
-    <%= f.number_field :required_weight_lbs %>
+    <%= f.label :required_weight_lbs,"Required Weight lbs" %><br>
+    <%= f.text_field :calculate_weight_in_lbs, :disabled=>true %><br>
   </div>
   <div class="field">
-    <%= f.label :remaining_weight_tons %><br>
+    <%= f.label :remaining_weight_tons,"Remaining Weight Tons" %><br>
     <%= f.number_field :remaining_weight_tons %>
   </div>
   <div class="field">
-    <%= f.label :remaining_weight_lbs %><br>
+    <%= f.label :remaining_weight_lbs,"Remaining Weight lbs" %><br>
     <%= f.number_field :remaining_weight_lbs %>
   </div>
   <div class="field">
@@ -36,15 +36,15 @@
     <%= f.select(:vendor_id, options_for_select(vendors)) %>
   </div>
   <div class="field">
-    <%= f.label :well_name %><br>
+    <%= f.label :well_name,"Well Name" %><br>
     <%= f.text_field :well_name %>
   </div>
   <div class="field">
-    <%= f.label :sand_grade %><br>
+    <%= f.label :sand_grade,"Sand Grade" %><br>
     <%= f.select :sand_grade, ['40/70m', '100m']%>
     </div>
   <div class="field">
-    <%= f.label :start_date %><br>
+    <%= f.label :start_date,"Start Date" %><br>
     <%= f.date_select :start_date %>
   </div>
   <div class="field">

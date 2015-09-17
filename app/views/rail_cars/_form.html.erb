@@ -12,27 +12,27 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :railcar_nbr %><br>
+    <%= f.label :railcar_nbr,"Rail Car \#" %><br>
     <%= f.text_field :railcar_nbr %>
   </div>
   <div class="field">
-    <%= f.label :wgt_on_arrival %><br>
-    <%= f.number_field :wgt_on_arrival %>
+    <%= f.label :wgt_on_arrival, "Weight on Arrival Tons" %><br>
+    <%= f.text_field :wgt_on_arrival, :class => 'wgt_on_arrival', :value => (number_with_precision(f.object.wgt_on_arrival, :precision => 2) || 0) %>
   </div>
   <div class="field">
-    <%= f.label :wgt_at_origin %><br>
+    <%= f.label :wgt_at_origin, "Weight at Origin lbs" %><br>
     <%= f.number_field :wgt_at_origin %>
   </div>
   <div class="field">
-    <%= f.label :sand_grade %><br>
+    <%= f.label :sand_grade, "Sand Grade" %><br>
     <%= f.select :sand_grade, ['40/70m', '100m']%>
   </div>
   <div class="field">
-    <%= f.label :car_empty %><br>
+    <%= f.label :car_empty,"Car Empty" %><br>
     <%= f.check_box :car_empty %>
   </div>
   <div class="field">
-    <%= f.label :bol_nbr %><br>
+    <%= f.label :bol_nbr, "BOL \#" %><br>
     <%= f.number_field :bol_nbr %>
   </div>
   <div class="field">
@@ -40,35 +40,35 @@
     <%= f.text_field :vendor_id %>
   </div>
   <div class="field">
-    <%= f.label :vendor_po_nbr %><br>
+    <%= f.label :vendor_po_nbr, "Vendor PO \#" %><br>
     <%= f.number_field :vendor_po_nbr %>
   </div>
   <div class="field">
-    <%= f.label :email_bol %><br>
+    <%= f.label :email_bol, "Email BOL" %><br>
     <%= f.check_box :email_bol %>
   </div>
   <div class="field">
-    <%= f.label :purchaseorder_id %><br>
+    <%= f.label :purchaseorder_id, "Purchase Order \#" %><br>
     <%= f.number_field :purchaseorder_id %>
   </div>
   <div class="field">
-    <%= f.label :arrival_dt_elk_city %><br>
+    <%= f.label :arrival_dt_elk_city, "Arrival Date Elk City" %><br>
     <%= f.date_select :arrival_dt_elk_city %>
   </div>
   <div class="field">
-    <%= f.label :arrival_dt_400_line %><br>
+    <%= f.label :arrival_dt_400_line, "Arrival Date 400 Line" %><br>
     <%= f.date_select :arrival_dt_400_line %>
   </div>
   <div class="field">
-    <%= f.label :actual_dep_dt %><br>
+    <%= f.label :actual_dep_dt,"Actual Drop Off Date" %><br>
     <%= f.date_select :actual_dep_dt %>
   </div>
   <div class="field">
-    <%= f.label :arrival_dt_onsite %><br>
+    <%= f.label :arrival_dt_onsite,"Arrival Date" %><br>
     <%= f.date_select :arrival_dt_onsite %>
   </div>
   <div class="field">
-    <%= f.label :bol_arrival_dt %><br>
+    <%= f.label :bol_arrival_dt,"BOL Arrival Date" %><br>
     <%= f.date_select :bol_arrival_dt %>
   </div>
   <div class="field">

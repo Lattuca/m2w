@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150914042529) do
+ActiveRecord::Schema.define(version: 20150916034042) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,7 +37,7 @@ ActiveRecord::Schema.define(version: 20150914042529) do
   end
 
   create_table "purchase_orders", force: :cascade do |t|
-    t.integer  "required_weight_tons"
+    t.decimal  "required_weight_tons",  precision: 5, scale: 2
     t.integer  "required_weight_lbs"
     t.integer  "remaining_weight_tons"
     t.integer  "remaining_weight_lbs"
@@ -48,8 +48,8 @@ ActiveRecord::Schema.define(version: 20150914042529) do
     t.boolean  "active"
     t.string   "added_by"
     t.string   "changed_by"
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
+    t.datetime "created_at",                                    null: false
+    t.datetime "updated_at",                                    null: false
     t.integer  "po_nbr"
   end
 
@@ -57,7 +57,7 @@ ActiveRecord::Schema.define(version: 20150914042529) do
 
   create_table "rail_cars", force: :cascade do |t|
     t.string   "railcar_nbr"
-    t.integer  "wgt_on_arrival"
+    t.decimal  "wgt_on_arrival",      precision: 5, scale: 2
     t.integer  "wgt_at_origin"
     t.string   "sand_grade"
     t.boolean  "car_empty"
@@ -73,8 +73,8 @@ ActiveRecord::Schema.define(version: 20150914042529) do
     t.date     "bol_arrival_dt"
     t.string   "added_by"
     t.string   "changed_by"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
+    t.datetime "created_at",                                  null: false
+    t.datetime "updated_at",                                  null: false
   end
 
   add_index "rail_cars", ["purchaseorder_id"], name: "index_rail_cars_on_purchaseorder_id", using: :btree
