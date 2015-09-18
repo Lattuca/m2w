@@ -4,28 +4,34 @@ class RailCarsController < ApplicationController
 
   # GET /rail_cars
   # GET /rail_cars.json
+
+
   def index
     @rail_cars = RailCar.all
   end
 
   # GET /rail_cars/1
   # GET /rail_cars/1.json
+
   def show
   end
 
   # GET /rail_cars/new
   def new
     @rail_car = RailCar.new
+    @vendors = Vendor.list_for_select
   end
 
   # GET /rail_cars/1/edit
   def edit
+    @vendors = Vendor.list_for_select
   end
 
   # POST /rail_cars
   # POST /rail_cars.json
   def create
     @rail_car = RailCar.new(rail_car_params)
+    @vendors = Vendor.list_for_select
 
     respond_to do |format|
       if @rail_car.save
@@ -40,7 +46,9 @@ class RailCarsController < ApplicationController
 
   # PATCH/PUT /rail_cars/1
   # PATCH/PUT /rail_cars/1.json
+
   def update
+    @vendors = Vendor.list_for_select
     respond_to do |format|
       if @rail_car.update(rail_car_params)
         format.html { redirect_to @rail_car, notice: 'Rail car was successfully updated.' }
@@ -60,6 +68,14 @@ class RailCarsController < ApplicationController
       format.html { redirect_to rail_cars_url, notice: 'Rail car was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def connect_railcar_vendor
+    rail_car = RailCar.find(params[:id])
+    vendor = Vendor.find(params[:vendor_id])
+    rail_car.vendor = vendor
+    rail_car.save
+    redirect_to rail_car_path(rail_car)
   end
 
   private

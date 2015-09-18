@@ -36,8 +36,8 @@
     <%= f.number_field :bol_nbr %>
   </div>
   <div class="field">
-    <%= f.label :vendor_id %><br>
-    <%= f.text_field :vendor_id %>
+    <%= f.label :vendor %><br>
+    <%= f.select(:vendor_id, options_for_select(vendors)) %>
   </div>
   <div class="field">
     <%= f.label :vendor_po_nbr, "Vendor PO \#" %><br>

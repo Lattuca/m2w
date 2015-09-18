@@ -26,15 +26,16 @@
 </p>
 
 <p>
-  <strong>Bol nbr:</strong>
+  <strong>Bol Nbr:</strong>
   <%= @rail_car.bol_nbr %>
 </p>
 
 <p>
-  <strong>Vendor:</strong>
+  <strong>Vendor Name:</strong>
+  <%= "#{@rail_car.vendor.vendor_name}" %>
+  <strong>Vendor Id:</strong>
   <%= @rail_car.vendor_id %>
 </p>
-
 <p>
   <strong>Vendor po nbr:</strong>
   <%= @rail_car.vendor_po_nbr %>

@@ -1,6 +1,6 @@
 <h1>Editing Rail Car</h1>
 
-<%= render 'form' %>
+<%= render partial: "form", :locals => {vendors: @vendors} %>
 
 <%= link_to 'Show', @rail_car %> |
 <%= link_to 'Back', rail_cars_path %>

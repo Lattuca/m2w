@@ -5,6 +5,7 @@ class PurchaseOrdersController < ApplicationController
 
   # GET /purchase_orders
   # GET /purchase_orders.json
+@vendors = Vendor.list_for_select
   def index
     @purchase_orders = PurchaseOrder.all
   end

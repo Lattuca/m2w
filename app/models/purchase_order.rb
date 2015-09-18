@@ -10,6 +10,5 @@ class PurchaseOrder < ActiveRecord::Base
 
   def calculate_weight_in_lbs
     self.required_weight_lbs = required_weight_tons * 2206.7
-    #self.required_weight_lbs = 99
   end
 end
