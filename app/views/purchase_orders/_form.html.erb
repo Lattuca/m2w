@@ -33,7 +33,9 @@
   </div>
   <div class="field">
     <%= f.label :vendor %><br>
-    <%= f.select(:vendor_id, options_for_select(vendors)) %>
+    <% if :vendor_id != nil %>
+      <%= f.select(:vendor_id, options_for_select(vendors)) %>
+    <% end %>
   </div>
   <div class="field">
     <%= f.label :well_name,"Well Name" %><br>

@@ -18,6 +18,7 @@ class PurchaseOrdersController < ApplicationController
   # GET /purchase_orders/new
   def new
     @purchase_order = PurchaseOrder.new
+    @purchase_order.required_weight_tons = 0
     @vendors = Vendor.list_for_select
   end
 
