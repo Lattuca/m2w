@@ -36,11 +36,11 @@
     <%= f.number_field :bol_nbr %>
   </div>
   <div class="field">
-    <%= f.label :vendor %><br>
+    <%= f.label :vendor, "Vendor \#" %><br>
     <%= f.select(:vendor_id, options_for_select(vendors)) %>
   </div>
   <div class="field">
-    <%= f.label :vendor_po_nbr, "Vendor PO \#" %><br>
+    <%= f.label :vendor_po_nbr, "Vendor Halliburton TO #" %><br>
     <%= f.number_field :vendor_po_nbr %>
   </div>
   <div class="field">

@@ -1,37 +1,37 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Vendor name:</strong>
+  <strong>Vendor Name:</strong>
   <%= @vendor.vendor_name %>
 </p>
 
 <p>
-  <strong>Address line 1:</strong>
+  <strong>Address Line1:</strong>
   <%= @vendor.address_line_1 %>
 </p>
 
 <p>
-  <strong>Address line 2:</strong>
+  <strong>Address Line2:</strong>
   <%= @vendor.address_line_2 %>
 </p>
 
 <p>
-  <strong>City name:</strong>
+  <strong>City Name:</strong>
   <%= @vendor.city_name %>
 </p>
 
 <p>
-  <strong>State code:</strong>
+  <strong>State:</strong>
   <%= @vendor.state_code %>
 </p>
 
 <p>
-  <strong>Zip code:</strong>
+  <strong>ZIP:</strong>
   <%= @vendor.zip_code %>
 </p>
 
 <p>
-  <strong>Contact name1:</strong>
+  <strong>Contact Name1:</strong>
   <%= @vendor.contact_name1 %>
 </p>
 
@@ -41,12 +41,12 @@
 </p>
 
 <p>
-  <strong>Phone nbr1:</strong>
+  <strong>Phone #1:</strong>
   <%= @vendor.phone_nbr1 %>
 </p>
 
 <p>
-  <strong>Contact name2:</strong>
+  <strong>Contact Name2:</strong>
   <%= @vendor.contact_name2 %>
 </p>
 
@@ -56,7 +56,7 @@
 </p>
 
 <p>
-  <strong>Phone nbr2:</strong>
+  <strong>Phone #2:</strong>
   <%= @vendor.phone_nbr2 %>
 </p>
 
@@ -79,7 +79,7 @@
   <strong>Purchase Orders:</strong>
   <% @vendor.purchase_orders.each do |purchase_order| %>
     <p>
-      Purchase Order No: <%= purchase_order.id %> <br/>
+      PO #: <%= purchase_order.id %> <br/>
     </p>
     <% end %>
   </p>

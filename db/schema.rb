@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150916034042) do
+ActiveRecord::Schema.define(version: 20150919004934) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,13 +57,13 @@ ActiveRecord::Schema.define(version: 20150916034042) do
 
   create_table "rail_cars", force: :cascade do |t|
     t.string   "railcar_nbr"
-    t.decimal  "wgt_on_arrival",      precision: 5, scale: 2
+    t.decimal  "wgt_on_arrival",                precision: 5, scale: 2
     t.integer  "wgt_at_origin"
     t.string   "sand_grade"
     t.boolean  "car_empty"
     t.integer  "bol_nbr"
     t.integer  "vendor_id"
-    t.integer  "vendor_po_nbr"
+    t.integer  "vendor_po_nbr",       limit: 8
     t.boolean  "email_bol"
     t.integer  "purchaseorder_id"
     t.date     "arrival_dt_elk_city"
@@ -73,8 +73,8 @@ ActiveRecord::Schema.define(version: 20150916034042) do
     t.date     "bol_arrival_dt"
     t.string   "added_by"
     t.string   "changed_by"
-    t.datetime "created_at",                                  null: false
-    t.datetime "updated_at",                                  null: false
+    t.datetime "created_at",                                            null: false
+    t.datetime "updated_at",                                            null: false
   end
 
   add_index "rail_cars", ["purchaseorder_id"], name: "index_rail_cars_on_purchaseorder_id", using: :btree
