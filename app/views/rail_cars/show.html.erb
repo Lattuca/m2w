@@ -86,5 +86,39 @@
   <%= @rail_car.changed_by %>
 </p>
 
+<fieldset>
+  <legend> <strong> Uploaded Document </strong></legend>
+    <p>
+      <strong>File Name: </strong>
+        <%= @rail_car.doc_file_name %>
+    </p>
+    <p>
+      <strong>Content Type: </strong>
+        <%= @rail_car.doc_content_type %>
+    </p>
+    <p>
+      <strong>File Size: </strong>
+        <%= number_with_delimiter(@rail_car.doc_file_size) %>
+    </p>
+    <p>
+      <strong>Updated On: </strong>
+        <%= @rail_car.doc_updated_at %>
+    </p>
+    <p>
+      <strong>Comments: </strong>
+        <%= @rail_car.doc_comment %>
+    </p>
+    <p>
+  <strong> View Document :</string>
+
+  <h2>
+    <%= link_to @rail_car.doc.original_filename, @rail_car.doc.url if @rail_car.doc?%>
+  </h2>
+
+  <p>
+    <br>
+  <br>
+</fieldset>
+
 <%= link_to 'Edit', edit_rail_car_path(@rail_car) %> |
 <%= link_to 'Back', rail_cars_path %>

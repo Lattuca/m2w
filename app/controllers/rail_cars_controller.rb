@@ -86,6 +86,10 @@ class RailCarsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def rail_car_params
-      params.require(:rail_car).permit(:railcar_nbr, :wgt_on_arrival, :wgt_at_origin, :sand_grade, :car_empty, :bol_nbr, :vendor_id, :vendor_po_nbr, :email_bol, :purchaseorder_id, :arrival_dt_elk_city, :arrival_dt_400_line, :actual_dep_dt, :arrival_dt_onsite, :bol_arrival_dt, :added_by, :changed_by)
+      params.require(:rail_car).permit(:railcar_nbr, :wgt_on_arrival, :wgt_at_origin,
+                  :sand_grade, :car_empty, :bol_nbr, :vendor_id, :vendor_po_nbr, :email_bol,
+                  :purchaseorder_id, :arrival_dt_elk_city, :arrival_dt_400_line, :actual_dep_dt, :arrival_dt_onsite,
+                  :bol_arrival_dt, :added_by, :changed_by,
+                  :doc, :doc_file_name, :doc_file_size, :doc_content_type, :doc_comment, :doc_updated_at)
     end
 end

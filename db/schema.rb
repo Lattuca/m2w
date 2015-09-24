@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150919004934) do
+ActiveRecord::Schema.define(version: 20150923130610) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -75,10 +75,23 @@ ActiveRecord::Schema.define(version: 20150919004934) do
     t.string   "changed_by"
     t.datetime "created_at",                                            null: false
     t.datetime "updated_at",                                            null: false
+    t.string   "doc_file_name"
+    t.string   "doc_content_type"
+    t.integer  "doc_file_size"
+    t.text     "doc_comment"
+    t.datetime "doc_updated_at"
   end
 
   add_index "rail_cars", ["purchaseorder_id"], name: "index_rail_cars_on_purchaseorder_id", using: :btree
   add_index "rail_cars", ["vendor_id"], name: "index_rail_cars_on_vendor_id", using: :btree
+
+  create_table "railcardocs", force: :cascade do |t|
+    t.string   "filename"
+    t.string   "content_type"
+    t.binary   "file_contents"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
 
   create_table "trailers", force: :cascade do |t|
     t.string   "trailer_nbr"
