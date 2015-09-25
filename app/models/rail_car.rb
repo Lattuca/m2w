@@ -2,7 +2,10 @@ class RailCar < ActiveRecord::Base
   belongs_to :purchaseorder
   belongs_to :vendor
   #Document attachments
-  has_attached_file :doc, :url => "/:class/:attachment/:id/:basename.:extension", :path => ":rails_root/public/:class/:attachment/:id/:basename.:extension"
+  has_attached_file :doc, :url => "/:class/:attachment/:id/:basename.:extension",
+                          :path => ":rails_root/public/:class/:attachment/:id/:basename.:extension"
+  
+
 
   validates :railcar_nbr, presence: true, uniqueness: true
   validates_numericality_of :vendor_po_nbr, :greater_than_or_equal_to => 1000000000, :less_than_or_equal_to => 100000000000000, :message =>  "should be Halliburton TO# (10-15 digits)"
