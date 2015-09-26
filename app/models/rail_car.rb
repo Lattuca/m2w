@@ -2,9 +2,6 @@ class RailCar < ActiveRecord::Base
   require 'aws-sdk'
   belongs_to :purchaseorder
   belongs_to :vendor
-  #Document attachments
-  #has_attached_file :doc , :url => "/:class/:attachment/:id/:basename.:extension",
-                          #:path => ":rails_root/public/:class/:attachment/:id/:basename.:extension"
 
   has_attached_file :doc,
                     :storage => :s3,
@@ -18,7 +15,6 @@ class RailCar < ActiveRecord::Base
                     :s3_endpoint => "s3-us-west-1.amazonaws.com"
 
   Paperclip::Attachment.default_options[:url] = ':s3_domain_url'
-  #Paperclip::Attachment.default_options[:path] = '/:class/:attachment/:id_partition/:style/:filename'
   Paperclip::Attachment.default_options[:path] = '/:class/:attachment/:id/:filename'
 
   validates :railcar_nbr, presence: true, uniqueness: true
@@ -26,9 +22,7 @@ class RailCar < ActiveRecord::Base
   validates_numericality_of :wgt_on_arrival, :less_than => 1000
 
   # Documents validations
-  #validates_attachment :doc, content_type: {:content_type => %w(image/jpeg image/jpg image/png application/pdf application/msword application/vnd.openxmlformats-officedocument.wordprocessingml.document)}
-  #validates_attachment :doc, content_type: {:content_type => %w(image/jpeg image/jpg image/png application/pdf application/msword application/vnd.openxmlformats-officedoc.wordprocessingml.doc)}
-  #validates_attachment :doc, content_type: {content_type: "application/pdf"}
+
   validates_attachment :doc,
        content_type: {content_type: ['text/plain',
                                       "image/jpeg",
@@ -40,8 +34,8 @@ class RailCar < ActiveRecord::Base
                                       "application/msword",
                                       "application/vnd.openxmlformats-officedocument.wordprocessingml.document"]},
                        size: {less_than: 2.megabytes}
-  # Validates Size
-  #validates_with AttachmentSizeValidator, attributes: :doc, less_than: 1.megabytes
+
+
   # Explicitly do not Validate
   do_not_validate_attachment_file_type :doc
 

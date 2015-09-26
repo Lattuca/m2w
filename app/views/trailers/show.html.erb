@@ -75,5 +75,39 @@
   <%= @trailer.changed_by %>
 </p>
 
+<fieldset>
+  <legend> <strong> Uploaded Document </strong></legend>
+    <p>
+      <strong>File Name: </strong>
+        <%= @trailer.doc_file_name %>
+    </p>
+    <p>
+      <strong>Content Type: </strong>
+        <%= @trailer.doc_content_type %>
+    </p>
+    <p>
+      <strong>File Size: </strong>
+        <%= number_with_delimiter(@trailer.doc_file_size) %>
+    </p>
+    <p>
+      <strong>Updated On: </strong>
+        <%= @trailer.doc_updated_at %>
+    </p>
+    <p>
+      <strong>Comments: </strong>
+        <%= @trailer.doc_comment %>
+    </p>
+    <p>
+  <strong> View Document :</string>
+
+  <h3>
+    <%= link_to @trailer.doc.original_filename, @trailer.doc.url if @trailer.doc?%>
+  </h3>
+
+  <p>
+  <br>
+  <br>
+</fieldset>
+
 <%= link_to 'Edit', edit_trailer_path(@trailer) %> |
 <%= link_to 'Back', trailers_path %>

@@ -1,4 +1,4 @@
-<%= form_for(@trailer) do |f| %>
+<%= form_for(@trailer, html:{ multipart: true }) do |f| %>
   <% if @trailer.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@trailer.errors.count, "error") %> prohibited this trailer from being saved:</h2>
@@ -71,6 +71,24 @@
     <%= f.label :changed_by %><br>
     <%= f.text_field :changed_by %>
   </div>
+
+  <fieldset>
+    <legend>Uploaded Document</legend>
+    <div class="field">
+      <%= f.label :doc_file_name, "File Name: " %>
+      <%= f.text_field :doc_file_name, :disabled => true %>
+    </div>
+    <div class="field">
+      <%= f.label :doc, "Select New Document to Upload: " %>
+      <%= f.file_field :doc %>
+    </div>
+
+    <div class="field">
+      <%= f.label :doc_comment, "Comments:" %><br>
+      <%= f.text_area :doc_comment %>
+    </div>
+  </fieldset>
+
   <div class="actions">
     <%= f.submit %>
   </div>

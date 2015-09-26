@@ -70,6 +70,13 @@ class TrailersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def trailer_params
-      params.require(:trailer).permit(:trailer_nbr, :driver_name, :carrier_name, :date_shipped, :bol_nbr, :time_in, :time_out, :time_taken_number, :railcar_nbr, :worker, :weight_lbs, :weight_tons, :purchaseorder_id, :added_by, :changed_by)
+      params.require(:trailer).permit(:trailer_nbr, :driver_name, :carrier_name,
+                                      :date_shipped, :bol_nbr, :time_in, :time_out,
+                                      :time_taken_number, :railcar_nbr, :worker,
+                                      :weight_lbs, :weight_tons, :purchaseorder_id,
+                                      :added_by, :changed_by,
+                                      :doc, :doc_file_name, :doc_file_size,
+                                      :doc_content_type, :doc_comment, :doc_updated_at
+                                      )
     end
 end

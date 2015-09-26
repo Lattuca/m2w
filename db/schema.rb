@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150923130610) do
+ActiveRecord::Schema.define(version: 20150926192346) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -111,6 +111,11 @@ ActiveRecord::Schema.define(version: 20150923130610) do
     t.string   "changed_by"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
+    t.string   "doc_file_name"
+    t.string   "doc_content_type"
+    t.integer  "doc_file_size"
+    t.text     "doc_comment"
+    t.datetime "doc_updated_at"
   end
 
   add_index "trailers", ["purchaseorder_id"], name: "index_trailers_on_purchaseorder_id", using: :btree
