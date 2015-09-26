@@ -1,11 +1,25 @@
 class RailCar < ActiveRecord::Base
+  require 'aws-sdk'
   belongs_to :purchaseorder
   belongs_to :vendor
   #Document attachments
-  has_attached_file :doc, :url => "/:class/:attachment/:id/:basename.:extension",
-                          :path => ":rails_root/public/:class/:attachment/:id/:basename.:extension"
-  
+  #has_attached_file :doc , :url => "/:class/:attachment/:id/:basename.:extension",
+                          #:path => ":rails_root/public/:class/:attachment/:id/:basename.:extension"
 
+  has_attached_file :doc,
+                    :storage => :s3,
+                    :bucket => ENV['S3_BUCKET_NAME'],
+                    #:s3_credentials => "#{Rails.root}/config/aws.yml",
+                    :s3_credentials => {
+                      :bucket => ENV['S3_BUCKET_NAME'],
+                      :access_key_id => ENV['AWS_ACCESS_KEY_ID'],
+                      :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY']
+                    },
+                    :s3_endpoint => "s3-us-west-1.amazonaws.com"
+
+  Paperclip::Attachment.default_options[:url] = ':s3_domain_url'
+  #Paperclip::Attachment.default_options[:path] = '/:class/:attachment/:id_partition/:style/:filename'
+  Paperclip::Attachment.default_options[:path] = '/:class/:attachment/:id/:filename'
 
   validates :railcar_nbr, presence: true, uniqueness: true
   validates_numericality_of :vendor_po_nbr, :greater_than_or_equal_to => 1000000000, :less_than_or_equal_to => 100000000000000, :message =>  "should be Halliburton TO# (10-15 digits)"

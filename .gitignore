@@ -15,3 +15,6 @@
 /log/*
 !/log/.keep
 /tmp
+
+# do not store s3 credentials in git
+/config/initializers/env.rb
