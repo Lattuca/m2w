@@ -7,7 +7,7 @@ class TrailersController < ApplicationController
 
   # GET /trailers
   # GET /trailers.json
-  @purchase_orders = PurchaseOrder.list_for_select_po
+  #@purchase_orders = PurchaseOrder.list_for_select_po
   def index
     @trailers = Trailer.all
   end
@@ -15,6 +15,8 @@ class TrailersController < ApplicationController
   # GET /trailers/1
   # GET /trailers/1.json
   def show
+    # load the PO information to display po #
+    @trailer_po = PurchaseOrder.find(@trailer.purchaseorder_id)
   end
   # GET /trailers/new
   def new
