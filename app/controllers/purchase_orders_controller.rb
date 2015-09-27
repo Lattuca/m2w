@@ -33,7 +33,8 @@ class PurchaseOrdersController < ApplicationController
   def create
     @purchase_order = PurchaseOrder.new(purchase_order_params)
     @vendors = Vendor.list_for_select
-
+    @purchase_order.added_by = @user_full_name
+    @purchase_order.changed_by = @user_full_name
     respond_to do |format|
       if @purchase_order.save
         format.html { redirect_to @purchase_order, notice: 'Purchase order was successfully created.' }
@@ -49,6 +50,7 @@ class PurchaseOrdersController < ApplicationController
   # PATCH/PUT /purchase_orders/1.json
   def update
     @vendors = Vendor.list_for_select
+    @purchase_order.changed_by = @user_full_name
     respond_to do |format|
       if @purchase_order.update(purchase_order_params)
         format.html { redirect_to @purchase_order, notice: 'Purchase order was successfully updated.' }
@@ -71,6 +73,7 @@ class PurchaseOrdersController < ApplicationController
   end
 
   def connect
+    fail
     purchase_order = PurchaseOrder.find(params[:id])
     vendor = Vendor.find(params[:vendor_id])
     purchase_order.vendor = vendor
@@ -78,6 +81,11 @@ class PurchaseOrdersController < ApplicationController
     redirect_to purchase_order_path(purchase_order)
   end
 
+  def select
+    fail
+    @trailer_id = params[:id]
+    @trailers = PurchaseOrder.list_for_select_po
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -87,6 +95,9 @@ class PurchaseOrdersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def purchase_order_params
-      params.require(:purchase_order).permit(:required_weight_tons, :required_weight_lbs, :remaining_weight_tons, :remaining_weight_lbs, :vendor_id, :well_name, :sand_grade, :start_date, :active, :added_by, :changed_by, :po_nbr)
+      params.require(:purchase_order).permit(:required_weight_tons, :required_weight_lbs,
+                                              :remaining_weight_tons, :remaining_weight_lbs, :vendor_id,
+                                              :well_name, :sand_grade, :start_date, :active,
+                                              :po_nbr)
     end
 end

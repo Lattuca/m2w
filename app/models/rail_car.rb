@@ -1,6 +1,6 @@
 class RailCar < ActiveRecord::Base
   require 'aws-sdk'
-  belongs_to :purchaseorder
+  belongs_to :purchase_order
   belongs_to :vendor
 
   has_attached_file :doc,

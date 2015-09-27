@@ -32,9 +32,12 @@ class RailCarsController < ApplicationController
   def create
     @rail_car = RailCar.new(rail_car_params)
     @vendors = Vendor.list_for_select
+    @rail_car.added_by = @user_full_name
+    @rail_car.changed_by = @user_full_name
 
     respond_to do |format|
       if @rail_car.save
+        @rail_car.changed_by = @user_full_name
         format.html { redirect_to @rail_car, notice: 'Rail car was successfully created.' }
         format.json { render :show, status: :created, location: @rail_car }
       else
@@ -49,6 +52,7 @@ class RailCarsController < ApplicationController
 
   def update
     @vendors = Vendor.list_for_select
+    @rail_car.changed_by = @user_full_name
     respond_to do |format|
       if @rail_car.update(rail_car_params)
         format.html { redirect_to @rail_car, notice: 'Rail car was successfully updated.' }
@@ -89,7 +93,7 @@ class RailCarsController < ApplicationController
       params.require(:rail_car).permit(:railcar_nbr, :wgt_on_arrival, :wgt_at_origin,
                   :sand_grade, :car_empty, :bol_nbr, :vendor_id, :vendor_po_nbr, :email_bol,
                   :purchaseorder_id, :arrival_dt_elk_city, :arrival_dt_400_line, :actual_dep_dt, :arrival_dt_onsite,
-                  :bol_arrival_dt, :added_by, :changed_by,
+                  :bol_arrival_dt,
                   :doc, :doc_file_name, :doc_file_size, :doc_content_type, :doc_comment, :doc_updated_at)
     end
 end

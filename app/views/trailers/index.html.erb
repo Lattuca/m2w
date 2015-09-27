@@ -5,7 +5,7 @@
 <table>
   <thead>
     <tr>
-      <th>Trailer nbr</th>
+      <th>Trailer #</th>
       <th>Driver name</th>
       <th>Carrier name</th>
       <th>Date shipped</th>
@@ -13,13 +13,11 @@
       <th>Time in</th>
       <th>Time out</th>
       <th>Time taken number</th>
-      <th>Railcar nbr</th>
+      <th>Railcar #</th>
       <th>Worker</th>
       <th>Weight lbs</th>
       <th>Weight tons</th>
       <th>Purchaseorder</th>
-      <th>Added by</th>
-      <th>Changed by</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -40,8 +38,7 @@
         <td><%= trailer.weight_lbs %></td>
         <td><%= trailer.weight_tons %></td>
         <td><%= trailer.purchaseorder_id %></td>
-        <td><%= trailer.added_by %></td>
-        <td><%= trailer.changed_by %></td>
+      
         <td><%= link_to 'Show', trailer %></td>
         <td><%= link_to 'Edit', edit_trailer_path(trailer) %></td>
         <td><%= link_to 'Destroy', trailer, method: :delete, data: { confirm: 'Are you sure?' } %></td>

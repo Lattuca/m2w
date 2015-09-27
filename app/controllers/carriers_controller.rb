@@ -27,7 +27,8 @@ class CarriersController < ApplicationController
   # POST /carriers.json
   def create
     @carrier = Carrier.new(carrier_params)
-
+    @carrier.added_by = @user_full_name
+    @carrier.changed_by = @user_full_name
     respond_to do |format|
       if @carrier.save
         format.html { redirect_to @carrier, notice: 'Carrier was successfully created.' }
@@ -42,6 +43,7 @@ class CarriersController < ApplicationController
   # PATCH/PUT /carriers/1
   # PATCH/PUT /carriers/1.json
   def update
+    @carrier.changed_by = @user_full_name
     respond_to do |format|
       if @carrier.update(carrier_params)
         format.html { redirect_to @carrier, notice: 'Carrier was successfully updated.' }
@@ -71,6 +73,8 @@ class CarriersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def carrier_params
-      params.require(:carrier).permit(:carrier_name, :address_line_1, :address_line_2, :city_name, :state_code, :zip_code, :contact_name1, :email1, :phone_nbr1, :contact_name2, :email2, :phone_nbr2, :comments, :added_by, :changed_by)
+      params.require(:carrier).permit(:carrier_name, :address_line_1, :address_line_2, :city_name,
+                                      :state_code, :zip_code, :contact_name1, :email1, :phone_nbr1,
+                                      :contact_name2, :email2, :phone_nbr2, :comments)
     end
 end

@@ -1,6 +1,6 @@
 class Trailer < ActiveRecord::Base
   require 'aws-sdk'
-  belongs_to :purchaseorder
+  belongs_to :purchase_order
 
   has_attached_file :doc,
                     :storage => :s3,
@@ -39,5 +39,6 @@ class Trailer < ActiveRecord::Base
   do_not_validate_attachment_file_type :doc
 
   before_post_process :doc
+
 
 end

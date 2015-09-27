@@ -1,0 +1,6 @@
+<%= form_tag( trailer_connect_po_path, method: 'post') do %>
+  <%= hidden_field_tag(:trailer_id, @trailer_id) %>
+  Choose Purchase Order#:
+  <%= select_tag(:purchaseorder_id, options_for_select(@purchase_orders)) %>
+  <%= submit_tag("Select") %>
+<% end %>

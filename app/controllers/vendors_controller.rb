@@ -26,7 +26,8 @@ class VendorsController < ApplicationController
   # POST /vendors.json
   def create
     @vendor = Vendor.new(vendor_params)
-
+    @vendor.added_by = @user_full_name
+    @vendor.changed_by = @user_full_name
     respond_to do |format|
       if @vendor.save
         format.html { redirect_to @vendor, notice: 'Vendor was successfully created.' }
@@ -41,8 +42,9 @@ class VendorsController < ApplicationController
   # PATCH/PUT /vendors/1
   # PATCH/PUT /vendors/1.json
   def update
+    @vendor.changed_by = @user_full_name
     respond_to do |format|
-      if @vendor.update(vendor_params)
+    if @vendor.update(vendor_params)
         format.html { redirect_to @vendor, notice: 'Vendor was successfully updated.' }
         format.json { render :show, status: :ok, location: @vendor }
       else
@@ -75,6 +77,9 @@ class VendorsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def vendor_params
-      params.require(:vendor).permit(:vendor_name, :address_line_1, :address_line_2, :city_name, :state_code, :zip_code, :contact_name1, :email1, :phone_nbr1, :contact_name2, :email2, :phone_nbr2, :comments, :added_by, :changed_by)
+      params.require(:vendor).permit(:vendor_name, :address_line_1, :address_line_2,
+                                    :city_name, :state_code, :zip_code, :contact_name1,
+                                    :email1, :phone_nbr1, :contact_name2, :email2, :phone_nbr2,
+                                    :comments) #, :added_by, :changed_by)
     end
 end

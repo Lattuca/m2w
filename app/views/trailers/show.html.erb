@@ -61,7 +61,8 @@
 </p>
 
 <p>
-  <strong>Purchaseorder:</strong>
+  <strong>Purchase id:</strong>
+  <%#= @trailer.purchase_order.po_nbr %>
   <%= @trailer.purchaseorder_id %>
 </p>
 
@@ -101,12 +102,10 @@
   <strong> View Document :</string>
 
   <h3>
-    <%= link_to @trailer.doc.original_filename, @trailer.doc.url if @trailer.doc?%>
+    <%= link_to @trailer.doc.original_filename, @trailer.doc.url, :target => "_blank" if @trailer.doc?%>
   </h3>
 
   <p>
-  <br>
-  <br>
 </fieldset>
 
 <%= link_to 'Edit', edit_trailer_path(@trailer) %> |

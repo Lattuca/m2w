@@ -112,12 +112,10 @@
   <strong> View Document :</string>
 
   <h3>
-    <%= link_to @rail_car.doc.original_filename, @rail_car.doc.url if @rail_car.doc?%>
+    <%= link_to @rail_car.doc.original_filename, @rail_car.doc.url, :target => "_blank" if @rail_car.doc?%>
   </h3>
 
   <p>
-    <br>
-  <br>
 </fieldset>
 
 <%= link_to 'Edit', edit_rail_car_path(@rail_car) %> |

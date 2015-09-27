@@ -7,7 +7,6 @@ class SessionsController < ApplicationController
 
   def create
       user = User.find_by(login: params[:login])
-      puts :login
       if (user and user.authenticate(params[:password]))
         session[:user_id] = user.id
         redirect_to m2w_path
@@ -21,4 +20,7 @@ class SessionsController < ApplicationController
       redirect_to login_path, notice: "Logged out"
     end
 
+    def full_name
+        "#{first_name} #{last_name}"
+    end
 end

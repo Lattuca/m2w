@@ -10,6 +10,10 @@ class ApplicationController < ActionController::Base
   def authorize
     unless User.find_by(id: session[:user_id])
       redirect_to login_path, notice: "Please log in"
+    else
+      @current_user = User.find_by(id: session[:user_id])
+      @user_full_name = "#{@current_user.first_name} #{@current_user.last_name}"
     end
   end
+
 end

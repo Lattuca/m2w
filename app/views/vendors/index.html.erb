@@ -11,15 +11,9 @@
       <th>City</th>
       <th>State</th>
       <th>Zip</th>
-      <th>Contact Name1</th>
-      <th>Email1</th>
-      <th>Phone #1</th>
-      <th>Contact Name2</th>
-      <th>Email2</th>
-      <th>Phone #2</th>
-      <th>Comments</th>
-      <th>Added by</th>
-      <th>Changed by</th>
+      <th>Contact Name</th>
+      <th>Email</th>
+      <th>Phone #</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -36,12 +30,8 @@
         <td><%= vendor.contact_name1 %></td>
         <td><%= vendor.email1 %></td>
         <td><%= vendor.phone_nbr1 %></td>
-        <td><%= vendor.contact_name2 %></td>
-        <td><%= vendor.email2 %></td>
-        <td><%= vendor.phone_nbr2 %></td>
-        <td><%= vendor.comments %></td>
-        <td><%= vendor.added_by %></td>
-        <td><%= vendor.changed_by %></td>
+
+
         <td><%= link_to 'Show', vendor %></td>
         <td><%= link_to 'Edit', edit_vendor_path(vendor) %></td>
         <td><%= link_to 'Destroy', vendor, method: :delete, data: { confirm: 'Are you sure?' } %></td>
