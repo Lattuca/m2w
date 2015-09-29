@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<p><strong> Purchase Order Page </strong>
+<h2> Purchase Order Page </h2>
 
   <p>
     <strong>PO Number:</strong>
@@ -8,22 +8,22 @@
   </p>
 <p>
   <strong>Required weight tons:</strong>
-  <%= @purchase_order.required_weight_tons %>
+  <%= number_with_delimiter(@purchase_order.required_weight_tons) %>
 </p>
 
 <p>
   <strong>Required weight lbs:</strong>
-  <%= @purchase_order.calculate_weight_in_lbs %>
+  <%=number_with_delimiter(@purchase_order.calculate_weight_in_lbs) %>
 </p>
 
 <p>
   <strong>Remaining weight tons:</strong>
-  <%= @purchase_order.remaining_weight_tons %>
+  <%= number_with_delimiter(@purchase_order.remaining_weight_tons) %>
 </p>
 
 <p>
   <strong>Remaining weight lbs:</strong>
-  <%= @purchase_order.remaining_weight_lbs %>
+  <%= number_with_delimiter(@purchase_order.calculate_remaining_weight_in_lbs) %>
 </p>
 
 <p>

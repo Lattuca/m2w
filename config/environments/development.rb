@@ -50,3 +50,5 @@ Rails.application.configure do
     }
   }
 end
+
+#config.action_controller.include_all_helpers = true

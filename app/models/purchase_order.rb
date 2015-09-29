@@ -12,11 +12,12 @@ class PurchaseOrder < ActiveRecord::Base
   #convert tons to lbs
 
   def calculate_weight_in_lbs
-    self.required_weight_lbs = required_weight_tons * 2206.7
+    self.required_weight_lbs = (required_weight_tons * 2206.7).round(-1)
   end
-  #def calculate_remaining_weight
- #    self.remaining_weight_tons = required_weight_tons
-#  end
+
+  def calculate_remaining_weight_in_lbs
+    self.remaining_weight_lbs = (remaining_weight_tons * 2206.7).round(-1)
+  end
 
 def self.list_for_select_po
    self.all.map do |purchase_order|

@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<h2> Trailer Listing </h2>
+<h2> Trailer Details </h2>
 <p>
   <strong>Trailer nbr:</strong>
   <%= @trailer.trailer_nbr %>
@@ -50,16 +50,16 @@
   <strong>Worker:</strong>
   <%= @trailer.worker %>
 </p>
-
-<p>
-  <strong>Weight lbs:</strong>
-  <%= @trailer.weight_lbs %>
-</p>
-
 <p>
   <strong>Weight tons:</strong>
   <%= @trailer.weight_tons %>
 </p>
+
+<p>
+  <strong>Weight lbs:</strong>
+  <%= number_with_delimiter(@trailer.calculate_weight_in_lbs)%>
+</p>
+
 
 <p>
   <strong>Purchase id:</strong>

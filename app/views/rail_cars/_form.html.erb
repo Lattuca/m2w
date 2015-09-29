@@ -17,11 +17,13 @@
   </div>
   <div class="field">
     <%= f.label :wgt_on_arrival, "Weight on Arrival Tons" %><br>
-    <%= f.text_field :wgt_on_arrival, :class => 'wgt_on_arrival', :value => (number_with_precision(f.object.wgt_on_arrival, :precision => 2) || 0) %>
+    <%= f.text_field :wgt_on_arrival, :class => 'wgt_on_arrival',
+                                      :value => (number_with_precision(f.object.wgt_on_arrival, :precision => 2) || 0) %>
   </div>
   <div class="field">
     <%= f.label :wgt_at_origin, "Weight at Origin lbs" %><br>
-    <%= f.number_field :wgt_at_origin %>
+    <%= f.text_field :wgt_at_origin, :class => 'wgt_at_origin',
+                                    :value => (number_with_precision(f.object.wgt_at_origin, :precision => 2) || 0) %>
   </div>
   <div class="field">
     <%= f.label :sand_grade, "Sand Grade" %><br>

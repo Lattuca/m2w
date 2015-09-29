@@ -35,6 +35,7 @@ class PurchaseOrdersController < ApplicationController
     @vendors = Vendor.list_for_select
     @purchase_order.added_by = @user_full_name
     @purchase_order.changed_by = @user_full_name
+    @purchase_order.remaining_weight_tons =@purchase_order.required_weight_tons
     respond_to do |format|
       if @purchase_order.save
         format.html { redirect_to @purchase_order, notice: 'Purchase order was successfully created.' }
@@ -95,9 +96,12 @@ class PurchaseOrdersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def purchase_order_params
-      params.require(:purchase_order).permit(:required_weight_tons, :required_weight_lbs,
-                                              :remaining_weight_tons, :remaining_weight_lbs, :vendor_id,
-                                              :well_name, :sand_grade, :start_date, :active,
+      params.require(:purchase_order).permit(:required_weight_tons,
+                                              :vendor_id,
+                                              :well_name,
+                                              :sand_grade,
+                                              :start_date,
+                                              :active,
                                               :po_nbr)
     end
 end

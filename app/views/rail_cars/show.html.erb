@@ -1,4 +1,5 @@
 <p id="notice"><%= notice %></p>
+<h2> Trailer Details </h2>
 
 <p>
   <strong>Rail Car #:</strong>
@@ -7,12 +8,12 @@
 
 <p>
   <strong>Weight on Arrival:</strong>
-  <%= @rail_car.wgt_on_arrival %>
+  <%= number_with_delimiter(@rail_car.wgt_on_arrival) %>
 </p>
 
 <p>
   <strong>Weight at Origin:</strong>
-  <%= @rail_car.wgt_at_origin %>
+  <%= number_with_delimiter(@rail_car.wgt_at_origin) %>
 </p>
 
 <p>

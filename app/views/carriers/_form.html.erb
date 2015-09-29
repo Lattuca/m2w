@@ -28,8 +28,10 @@
     <%= f.text_field :city_name %>
   </div>
   <div class="field">
-    <%= f.label :state_code %><br>
-    <%= f.text_field :state_code %>
+    <%= f.label :state_code, "State" %><br>
+    <% if :state_code != nil %>
+      <%= f.select(:state_code, options_for_select(us_states,@carrier.state_code)) %>
+    <% end %>
   </div>
   <div class="field">
     <%= f.label :zip_code %><br>
@@ -63,7 +65,7 @@
     <%= f.label :comments %><br>
     <%= f.text_area :comments %>
   </div>
-  
+
   <div class="actions">
     <%= f.submit %>
   </div>

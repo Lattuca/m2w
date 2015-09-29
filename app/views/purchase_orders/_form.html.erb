@@ -17,21 +17,9 @@
   </div>
   <div class="field">
     <%= f.label :required_weight_tons, "Required Weight Tons" %><br>
-    <%= f.text_field :required_weight_tons, :class => 'required_weight_tons', :value => (number_with_precision(f.object.required_weight_tons, :precision => 2) || 0) %>
-  </div>
-  <div class="field">
-    <%= f.label :required_weight_lbs,"Required Weight lbs" %><br>
-    <%= f.text_field :calculate_weight_in_lbs, :disabled=>true %><br>
-  </div>
-  <div class="field">
-    <%= f.label :remaining_weight_tons,"Remaining Weight Tons" %><br>
-    <%= f.number_field :remaining_weight_tons %>
-  </div>
-  <div class="field">
-    <%= f.label :remaining_weight_lbs,"Remaining Weight lbs" %><br>
-    <%= f.number_field :remaining_weight_lbs %>
-  </div>
-  <div class="field">
+    <%= f.text_field :required_weight_tons, :class => 'required_weight_tons',
+                     :value => (number_with_precision(f.object.required_weight_tons, :precision => 2) || 0) %>
+    <div class="field">
     <%= f.label :vendor %><br>
     <% if :vendor_id != nil %>
       <%= f.select(:vendor_id, options_for_select(vendors)) %>
@@ -53,7 +41,7 @@
     <%= f.label :active %><br>
     <%= f.check_box :active %>
   </div>
-  
+
 
   <div class="actions">
     <%= f.submit %>

@@ -29,7 +29,9 @@
   </div>
   <div class="field">
     <%= f.label :state_code, "State" %><br>
-    <%= f.text_field :state_code %>
+    <% if :state_code != nil %>
+      <%= f.select(:state_code, options_for_select(us_states,@vendor.state_code)) %>
+    <% end %>
   </div>
   <div class="field">
     <%= f.label :zip_code,"ZIP" %><br>
@@ -63,7 +65,7 @@
     <%= f.label :comments %><br>
     <%= f.text_area :comments %>
   </div>
-  
+
   <div class="actions">
     <%= f.submit %>
   </div>

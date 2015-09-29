@@ -40,5 +40,8 @@ class Trailer < ActiveRecord::Base
 
   before_post_process :doc
 
+  def calculate_weight_in_lbs
+    self.weight_lbs = (weight_tons * 2206.7).round(-1)
+  end
 
 end
