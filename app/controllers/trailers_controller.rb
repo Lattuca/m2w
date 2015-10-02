@@ -25,9 +25,15 @@ class TrailersController < ApplicationController
 
   end
 
+  def load_po_array
+    puts "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxPO Loading Array"
+    @po_array = PurchaseOrder.where("remaining_weight_tons > ?",100 ).map { |po_array| [po_array.po_nbr, po_array.id] }
+
+  end
   # GET /trailers/1/edit
   def edit
     @purchase_orders = PurchaseOrder.list_for_select_po
+    load_po_array
   end
 
   # POST /trailers
@@ -52,7 +58,28 @@ class TrailersController < ApplicationController
   # PATCH/PUT /trailers/1.json
   def update
     @trailer.changed_by = @user_full_name
-    @purchaseorders = PurchaseOrder.list_for_select_po
+    @purchase_orders = PurchaseOrder.list_for_select_po
+
+    # update purchase order remaining weight  less what is the weight on the trailer (tons)
+    if @purchase_order = PurchaseOrder.find(@trailer.purchaseorder_id)
+       @remaining_tons = @purchase_order.required_weight_tons - @trailer.weight_tons
+       if @remaining_tons >= 0
+         @purchase_order.remaining_weight_tons = @remaining_tons
+         puts "........................................."
+         puts   @purchase_order.remaining_weight_tons
+       else
+         puts "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz"
+         puts "Remaining Weight cannot be less than 0"
+         @purchase_order.remaining_weight_tons = 0
+       end
+       @purchase_order.save
+     else
+       puts "........................................."
+       puts "record not found"
+       format.html { render :edit }
+       format.json { render json: @trailer.errors, status: :unprocessable_entity }
+     end
+
     respond_to do |format|
       if @trailer.update(trailer_params)
         format.html { redirect_to @trailer, notice: 'Trailer was successfully updated.' }

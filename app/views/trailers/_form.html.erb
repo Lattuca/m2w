@@ -10,7 +10,6 @@
       </ul>
     </div>
   <% end %>
-
   <div class="field">
     <%= f.label :trailer_nbr %><br>
     <%= f.text_field :trailer_nbr %>
@@ -57,9 +56,12 @@
   </div>
   <div class="field">
     <%= f.label :purchase_order, "PO \#: " %>
-    <% if :purchaseorder_id != nil %>
-      <%= f.select(:purchaseorder_id, options_for_select(@purchase_orders)) %>
-    <% end %>
+      <%= f.number_field :purchaseorder_id %>
+    <% #if :purchaseorder_id != nil %>
+      <%= f.select(:purchaseorder_id, options_for_select(@po_array)) %>
+      <%#= f.select(:purchaseorder_id, options_for_select(purchase_orders)) %>
+
+    <%# end %>
   </div>
 
   <fieldset>

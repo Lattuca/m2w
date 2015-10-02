@@ -15,10 +15,21 @@
     <%=f.label :po_nbr, "PO \#" %>
     <%=f.number_field :po_nbr %><br>
   </div>
-  <div class="field">
-    <%= f.label :required_weight_tons, "Required Weight Tons" %><br>
-    <%= f.text_field :required_weight_tons, :class => 'required_weight_tons',
+   <div class="field">
+    <%= f.label :required_weight_tons, "Required Weight Tons  " %>
+    <% if   !@new_po %>
+       <%= f.text_field :required_weight_tons, :class => 'required_weight_tons',
+                     disabled: true,
                      :value => (number_with_precision(f.object.required_weight_tons, :precision => 2) || 0) %>
+    <% else %>
+        <%= f.text_field :required_weight_tons, :class => 'required_weight_tons',
+                    :value => (number_with_precision(f.object.required_weight_tons, :precision => 2) || 0) %>
+    <% end %>
+  </div>
+    <div class="field">
+      <%=f.label :remaining_weight_tons, "Remaining Weight Tons" %>
+      <%=f.number_field :remaining_weight_tons, disabled: true %>
+    </div>
     <div class="field">
     <%= f.label :vendor %><br>
     <% if :vendor_id != nil %>

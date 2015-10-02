@@ -5,8 +5,10 @@ class PurchaseOrder < ActiveRecord::Base
 
 
   validates :po_nbr, :added_by, :changed_by, :vendor_id, presence: true
-  validates_numericality_of :po_nbr, :greater_than_or_equal_to => 10000000, :less_than_or_equal_to => 999999999, :message =>  "needs to be between 8-10 digits"
+  validates_numericality_of :po_nbr, :greater_than_or_equal_to => 10000000, :less_than_or_equal_to => 1000000000,
+                            :message =>  "needs to be between 8-10 digits"
   validates_numericality_of :required_weight_tons, :less_than => 1000
+  validates :po_nbr, uniqueness: true #, :message => "This PO number already exists"
   before_create :calculate_weight_in_lbs
 
   #convert tons to lbs
@@ -16,7 +18,11 @@ class PurchaseOrder < ActiveRecord::Base
   end
 
   def calculate_remaining_weight_in_lbs
-    self.remaining_weight_lbs = (remaining_weight_tons * 2206.7).round(-1)
+    if remaining_weight_tons != nil
+      self.remaining_weight_lbs = (remaining_weight_tons * 2206.7).round(-1)
+    else
+      self.remaining_weight_lbs =0
+    end
   end
 
 def self.list_for_select_po
