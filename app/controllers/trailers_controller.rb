@@ -12,35 +12,49 @@ class TrailersController < ApplicationController
     @trailers = Trailer.all
   end
 
+  def load_po_array
+    #puts "ccccccccccccccccccccccccccccccccccccccccccccccccc PO Loading Array"
+    @po_array = PurchaseOrder.where("remaining_weight_lbs > ?",100 ).map { |po_array| [po_array.po_nbr, po_array.id] }
+  end
   # GET /trailers/1
   # GET /trailers/1.json
   def show
     # load the PO information to display po #
-    @trailer_po = PurchaseOrder.find(@trailer.purchaseorder_id)
+    if @trailer.purchaseorder_id !=0
+       @trailer_po = PurchaseOrder.find(@trailer.purchaseorder_id)
+       @trailer_po_nf = false
+     else
+       # set to 0 for the Show screen
+       @trailer_po_nf = true
+     end
   end
   # GET /trailers/new
   def new
+    #puts "44444444444444444444444 new load po array"
+    load_po_array
+    @trailer_new = true
     @trailer = Trailer.new
-    @purchase_orders = PurchaseOrder.list_for_select_po
-
   end
 
-  def load_po_array
-    puts "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxPO Loading Array"
-    @po_array = PurchaseOrder.where("remaining_weight_tons > ?",100 ).map { |po_array| [po_array.po_nbr, po_array.id] }
 
-  end
   # GET /trailers/1/edit
   def edit
-    @purchase_orders = PurchaseOrder.list_for_select_po
+    #@purchase_orders = PurchaseOrder.list_for_select_po
+    if @trailer.purchaseorder_id !=0
+      @trailer_new = false
+    else
+      @trailer_new = true
+    end
     load_po_array
   end
 
   # POST /trailers
   # POST /trailers.json
   def create
+    load_po_array
+    @trailer_new = true
     @trailer = Trailer.new(trailer_params)
-    @purchase_orders = PurchaseOrder.list_for_select_po
+    #@purchase_orders = PurchaseOrder.list_for_select_po
     @trailer.added_by = @user_full_name
     @trailer.changed_by = @user_full_name
     respond_to do |format|
@@ -51,6 +65,10 @@ class TrailersController < ApplicationController
         format.html { render :new }
         format.json { render json: @trailer.errors, status: :unprocessable_entity }
       end
+      # update the PO remaing weight on the PO
+      #puts"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb new trailer purchase id"
+      #puts @trailer.purchaseorder_id.to_s
+      update_po_remaining_tons(@trailer.purchaseorder_id)
     end
   end
 
@@ -58,27 +76,10 @@ class TrailersController < ApplicationController
   # PATCH/PUT /trailers/1.json
   def update
     @trailer.changed_by = @user_full_name
-    @purchase_orders = PurchaseOrder.list_for_select_po
+    #@purchase_orders = PurchaseOrder.list_for_select_po
 
     # update purchase order remaining weight  less what is the weight on the trailer (tons)
-    if @purchase_order = PurchaseOrder.find(@trailer.purchaseorder_id)
-       @remaining_tons = @purchase_order.required_weight_tons - @trailer.weight_tons
-       if @remaining_tons >= 0
-         @purchase_order.remaining_weight_tons = @remaining_tons
-         puts "........................................."
-         puts   @purchase_order.remaining_weight_tons
-       else
-         puts "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz"
-         puts "Remaining Weight cannot be less than 0"
-         @purchase_order.remaining_weight_tons = 0
-       end
-       @purchase_order.save
-     else
-       puts "........................................."
-       puts "record not found"
-       format.html { render :edit }
-       format.json { render json: @trailer.errors, status: :unprocessable_entity }
-     end
+
 
     respond_to do |format|
       if @trailer.update(trailer_params)
@@ -88,6 +89,10 @@ class TrailersController < ApplicationController
         format.html { render :edit }
         format.json { render json: @trailer.errors, status: :unprocessable_entity }
       end
+      # update the PO remaing weight on the PO
+      #puts"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb update trailer purchase id"
+      #puts @trailer.purchaseorder_id.to_s
+      update_po_remaining_tons(@trailer.purchaseorder_id)
     end
   end
 
@@ -101,15 +106,43 @@ class TrailersController < ApplicationController
     end
   end
 
-  def connect_po
-    fail
-    trailer = Trailer.find(params[:id])
-    purchase_order = PurchaseOrder.find(params[:id])
-    trailer.purchaseorder_id = purchase_order
-    trailer.save
-    redirect_to trailer_path(trailer)
-  end
+  #def connect_po
+  #  fail
+  #  trailer = Trailer.find(params[:id])
+  #  purchase_order = PurchaseOrder.find(params[:id])
+  #  trailer.purchaseorder_id = purchase_order
+  #  trailer.save
+  #  redirect_to trailer_path(trailer)
+  #end
 
+  def update_po_remaining_tons(po_id)
+   return if po_id == 0 # exit if empty
+    # function to update remaining weight tons
+
+    #puts "****************************************in update po trailer purchase id"
+    #puts po_id.to_s
+    if @purchase_order = PurchaseOrder.find(po_id)
+       @remaining_tons = @purchase_order.required_weight_tons - @trailer.weight_tons
+       if @remaining_tons >= 0
+         @purchase_order.remaining_weight_tons = @remaining_tons
+         @purchase_order.remaining_weight_lbs =  (@remaining_tons * 2206.7).round(-1)
+         #puts ".........................................po.remaining weight"
+         #puts   @purchase_order.remaining_weight_tons,@purchase_order.po_nbr.to_s,@purchase_order.id.to_s
+         @purchase_order.save
+         #puts "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx PO SAVED",po_id.to_s
+       else
+         #puts "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz"
+         #puts "Remaining Weight cannot be less than 0"
+         @purchase_order.remaining_weight_tons = 0
+       end
+
+     else
+       #puts "........................................."
+       #puts "record not found"
+       format.html { render :edit }
+       format.json { render json: @trailer.errors, status: :unprocessable_entity }
+     end
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.

@@ -63,7 +63,13 @@
 
 <p>
   <strong>Purchase Order #:</strong>
-  <%= @trailer_po.po_nbr %>
+  <% if @trailer_po_nf %>
+     <%= "Not Assigned" %>
+  <% else %>
+     <%= @trailer_po.po_nbr %>
+     <strong> Po Id: </strong>
+     <%= @trailer_po.id %>
+  <% end %>
   <%#= @trailer.purchaseorder_id %>
 </p>
 

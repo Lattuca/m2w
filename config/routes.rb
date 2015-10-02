@@ -10,17 +10,16 @@ Rails.application.routes.draw do
 
   resources :carriers
 
-  #post 'rail_car_vendors/connect' => 'rail_car_vendors#connect', as: :connect_railcar_vendor
   resources :rail_cars
 
   #post 'purchase_orders/connect' => 'purchase_orders#connect', as: :purchase_order_connect
-  get 'purchase_orders/:id/select' => 'purchase_orders#select', as: :select_purchase_order
+  #get 'purchase_orders/:id/select' => 'purchase_orders#select', as: :select_purchase_order
   resources :purchase_orders
 
   get 'vendors/:id/select' => 'vendors#select', as: :select_vendor
   resources :vendors
 
-  post 'trailers/connect_po' => 'trailers#connect_po', as: :trailer_connect_po
+  #post 'trailers/connect_po' => 'trailers#connect_po', as: :trailer_connect_po
   #get 'trailers/:id/select' => 'trailers#select', as: :select_trailer
   resources :trailers
 

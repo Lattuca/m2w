@@ -7,7 +7,7 @@ class PurchaseOrdersController < ApplicationController
   # GET /purchase_orders.json
 @vendors = Vendor.list_for_select
   def index
-    @purchase_orders = PurchaseOrder.all
+    @purchase_orders = PurchaseOrder.all.order(:po_nbr)
   end
 
   # GET /purchase_orders/1
@@ -29,10 +29,10 @@ class PurchaseOrdersController < ApplicationController
     @new_po = false
       # save the remaining weight tons  in case it got changed
     #@purchase_orders = PurchaseOrder.all
-    @prev_remaining_weight_tons = @purchase_order.remaining_weight_tons
-    puts "........................ remaining weight"
-    puts @prev_remaining_weight_tons.to_s
-    puts "end.............................."
+    #@prev_remaining_weight_tons = @purchase_order.remaining_weight_tons
+    #puts "........................ remaining weight"
+    #puts @prev_remaining_weight_tons.to_s
+    #puts "end.............................."
   end
 
 
@@ -43,9 +43,10 @@ class PurchaseOrdersController < ApplicationController
     @vendors = Vendor.list_for_select
     @purchase_order.added_by = @user_full_name
     @purchase_order.changed_by = @user_full_name
-    print"zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz:"
-    puts @purchase_order.remaining_weight_tons
-    puts "xxxx"
+    @purchase_order.remaining_weight_tons = @purchase_order.required_weight_tons
+    #print"zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz:"
+    #puts @purchase_order.remaining_weight_tons
+    #puts "xxxx"
     respond_to do |format|
       if @purchase_order.save
         format.html { redirect_to @purchase_order, notice: 'Purchase order was successfully created.' }
@@ -60,12 +61,12 @@ class PurchaseOrdersController < ApplicationController
   # PATCH/PUT /purchase_orders/1
   # PATCH/PUT /purchase_orders/1.json
   def update
-    @prev_remaining_weight_tons = @purchase_order.remaining_weight_tons
+    #@prev_remaining_weight_tons = @purchase_order.remaining_weight_tons
     @vendors = Vendor.list_for_select
     @purchase_order.changed_by = @user_full_name
-    puts "remaining weight tons assignemt.................................."
-    update_remaining_weight_tons
-    puts @purchase_order.remaining_weight_tons
+    #puts "remaining weight tons assignemt.................................."
+    #update_remaining_weight_tons
+    #puts @purchase_order.remaining_weight_tons
     # recalculate just in case required_weight_tons changed
     #@purchase_order.remaining_weight_tons = @prev_remaining_weight_tons
     respond_to do |format|
@@ -89,9 +90,9 @@ class PurchaseOrdersController < ApplicationController
     end
   end
 
-  def update_remaining_weight_tons
-    @purchase_order.remaining_weight_tons = @purchase_order.required_weight_tons - @prev_remaining_weight_tons
-  end
+  #def update_remaining_weight_tons
+  #  @purchase_order.remaining_weight_tons = @purchase_order.required_weight_tons - @prev_remaining_weight_tons
+  #end
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_purchase_order
@@ -101,7 +102,7 @@ class PurchaseOrdersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def purchase_order_params
       params.require(:purchase_order).permit(:required_weight_tons,
-                                              :remaining_weight_tons,
+                                              #:remaining_weight_tons,
                                               :vendor_id,
                                               :well_name,
                                               :sand_grade,
