@@ -37,6 +37,10 @@ gem 'bcrypt', '~> 3.1.7'
 # gem paperclip to upload documents
 gem "paperclip", "~> 4.3"
 
+# add gem for seed_dump
+
+gem 'seed_dump'
+
 # gem for amaaon server
 #gem "aws-sdk" , "~> 2.1.23"
 gem 'aws-sdk', '< 2.0'

@@ -39,6 +39,7 @@ class PurchaseOrdersController < ApplicationController
   # POST /purchase_orders
   # POST /purchase_orders.json
   def create
+    @new_po = true
     @purchase_order = PurchaseOrder.new(purchase_order_params)
     @vendors = Vendor.list_for_select
     @purchase_order.added_by = @user_full_name

@@ -122,17 +122,17 @@ class TrailersController < ApplicationController
     #puts "****************************************in update po trailer purchase id"
     #puts po_id.to_s
     if @purchase_order = PurchaseOrder.find(po_id)
-       @remaining_tons = @purchase_order.required_weight_tons - @trailer.weight_tons
+       @remaining_tons = @purchase_order.remaining_weight_tons - @trailer.weight_tons
        if @remaining_tons >= 0
          @purchase_order.remaining_weight_tons = @remaining_tons
-         @purchase_order.remaining_weight_lbs =  (@remaining_tons * 2206.7).round(-1)
+         @purchase_order.remaining_weight_lbs =  (@remaining_tons * 2206.7).to_i.round(-1)
          #puts ".........................................po.remaining weight"
          #puts   @purchase_order.remaining_weight_tons,@purchase_order.po_nbr.to_s,@purchase_order.id.to_s
          @purchase_order.save
          #puts "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx PO SAVED",po_id.to_s
        else
-         #puts "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz"
-         #puts "Remaining Weight cannot be less than 0"
+         puts "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz"
+         puts "Remaining Weight cannot be less than 0"
          @purchase_order.remaining_weight_tons = 0
        end
 
@@ -152,7 +152,7 @@ class TrailersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def trailer_params
-      params.require(:trailer).permit(:trailer_nbr, :driver_name, :carrier_name,
+      params.require(:trailer).permit(:trailer_nbr, :driver_name, :carrier_id,
                                       :date_shipped, :bol_nbr, :time_in, :time_out,
                                       :time_taken_number, :railcar_nbr, :worker,
                                       :weight_lbs, :weight_tons, :purchaseorder_id,

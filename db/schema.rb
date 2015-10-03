@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150928021650) do
+ActiveRecord::Schema.define(version: 20151003140539) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,9 +37,9 @@ ActiveRecord::Schema.define(version: 20150928021650) do
   end
 
   create_table "purchase_orders", force: :cascade do |t|
-    t.decimal  "required_weight_tons",  precision: 5, scale: 2
+    t.decimal  "required_weight_tons",            precision: 5, scale: 2
     t.integer  "required_weight_lbs"
-    t.integer  "remaining_weight_tons"
+    t.decimal  "remaining_weight_tons",           precision: 5, scale: 2
     t.integer  "remaining_weight_lbs"
     t.integer  "vendor_id"
     t.string   "well_name"
@@ -48,11 +48,13 @@ ActiveRecord::Schema.define(version: 20150928021650) do
     t.boolean  "active"
     t.string   "added_by"
     t.string   "changed_by"
-    t.datetime "created_at",                                    null: false
-    t.datetime "updated_at",                                    null: false
-    t.integer  "po_nbr"
+    t.datetime "created_at",                                              null: false
+    t.datetime "updated_at",                                              null: false
+    t.integer  "po_nbr",                limit: 8
   end
 
+  add_index "purchase_orders", ["po_nbr"], name: "index_purchase_orders_on_po_nbr", unique: true, using: :btree
+  add_index "purchase_orders", ["remaining_weight_lbs"], name: "index_purchase_orders_on_remaining_weight_lbs", using: :btree
   add_index "purchase_orders", ["vendor_id"], name: "index_purchase_orders_on_vendor_id", using: :btree
 
   create_table "rail_cars", force: :cascade do |t|
@@ -66,11 +68,11 @@ ActiveRecord::Schema.define(version: 20150928021650) do
     t.integer  "vendor_po_nbr",       limit: 8
     t.boolean  "email_bol"
     t.integer  "purchaseorder_id"
-    t.date     "arrival_dt_elk_city"
-    t.date     "arrival_dt_400_line"
-    t.date     "actual_dep_dt"
-    t.date     "arrival_dt_onsite"
-    t.date     "bol_arrival_dt"
+    t.datetime "arrival_dt_elk_city"
+    t.datetime "arrival_dt_400_line"
+    t.datetime "actual_dep_dt"
+    t.datetime "arrival_dt_onsite"
+    t.datetime "bol_arrival_dt"
     t.string   "added_by"
     t.string   "changed_by"
     t.datetime "created_at",                                            null: false
@@ -96,28 +98,30 @@ ActiveRecord::Schema.define(version: 20150928021650) do
   create_table "trailers", force: :cascade do |t|
     t.string   "trailer_nbr"
     t.string   "driver_name"
-    t.integer  "carrier_name"
+    t.integer  "carrier_id"
     t.date     "date_shipped"
     t.integer  "bol_nbr"
-    t.date     "time_in"
-    t.date     "time_out"
+    t.datetime "time_in"
+    t.datetime "time_out"
     t.string   "time_taken_number"
     t.string   "railcar_nbr"
     t.string   "worker"
     t.integer  "weight_lbs"
-    t.integer  "weight_tons"
+    t.decimal  "weight_tons",       precision: 5, scale: 2
     t.integer  "purchaseorder_id"
     t.string   "added_by"
     t.string   "changed_by"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.datetime "created_at",                                null: false
+    t.datetime "updated_at",                                null: false
     t.string   "doc_file_name"
     t.string   "doc_content_type"
     t.integer  "doc_file_size"
     t.text     "doc_comment"
     t.datetime "doc_updated_at"
+    t.integer  "carriers_id"
   end
 
+  add_index "trailers", ["carriers_id"], name: "index_trailers_on_carriers_id", using: :btree
   add_index "trailers", ["purchaseorder_id"], name: "index_trailers_on_purchaseorder_id", using: :btree
 
   create_table "user_access_levels", force: :cascade do |t|

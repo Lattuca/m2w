@@ -7,7 +7,7 @@
     <tr>
       <th>Trailer #</th>
       <th>Driver name</th>
-      <th>Carrier name</th>
+      <th>Carrier id</th>
       <th>Date shipped</th>
       <th>Bol nbr</th>
       <th>Time in</th>
@@ -27,7 +27,7 @@
       <tr>
         <td><%= trailer.trailer_nbr %></td>
         <td><%= trailer.driver_name %></td>
-        <td><%= trailer.carrier_name %></td>
+        <td><%= trailer.carrier_id %></td>
         <td><%= trailer.date_shipped %></td>
         <td><%= trailer.bol_nbr %></td>
         <td><%= trailer.time_in %></td>
@@ -38,7 +38,7 @@
         <td><%= trailer.weight_lbs %></td>
         <td><%= trailer.weight_tons %></td>
         <td><%= trailer.purchaseorder_id %></td>
-      
+
         <td><%= link_to 'Show', trailer %></td>
         <td><%= link_to 'Edit', edit_trailer_path(trailer) %></td>
         <td><%= link_to 'Destroy', trailer, method: :delete, data: { confirm: 'Are you sure?' } %></td>

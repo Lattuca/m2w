@@ -12,8 +12,8 @@
 </p>
 
 <p>
-  <strong>Carrier name:</strong>
-  <%= @trailer.carrier_name %>
+  <strong>Carrier id:</strong>
+  <%= @trailer.carrier_id %>
 </p>
 
 <p>
@@ -95,7 +95,7 @@
     </p>
     <p>
       <strong>File Size: </strong>
-        <%= number_with_delimiter(@trailer.doc_file_size) %>
+        <%= number_to_human_size(@trailer.doc_file_size) %>
     </p>
     <p>
       <strong>Updated On: </strong>

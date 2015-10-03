@@ -47,7 +47,7 @@
   </div>
   <div class="field">
     <%= f.label :phone_nbr1,"Phone \#" %><br>
-    <%= f.text_field :phone_nbr1 %>
+    <%= f.text_field number_to_phone(:phone_nbr1) %>
   </div>
   <div class="field">
     <%= f.label :contact_name2, "Contact Name2" %><br>
@@ -59,7 +59,7 @@
   </div>
   <div class="field">
     <%= f.label :phone_nbr2,"Phone \#" %><br>
-    <%= f.text_field :phone_nbr2 %>
+    <%= f.text_field number_to_phone(:phone_nbr2) %>
   </div>
   <div class="field">
     <%= f.label :comments %><br>
