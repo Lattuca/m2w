@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   resources :rail_cars
 
   #post 'purchase_orders/connect' => 'purchase_orders#connect', as: :purchase_order_connect
-  #get 'purchase_orders/:id/select' => 'purchase_orders#select', as: :select_purchase_order
+  get 'purchase_orders/:id/select' => 'purchase_orders#select', as: :select_purchase_order
   resources :purchase_orders
 
   get 'vendors/:id/select' => 'vendors#select', as: :select_vendor
