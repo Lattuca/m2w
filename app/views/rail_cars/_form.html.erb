@@ -49,10 +49,18 @@
     <%= f.label :email_bol, "Email BOL" %><br>
     <%= f.check_box :email_bol %>
   </div>
+
   <div class="field">
-    <%= f.label :purchaseorder_id, "Purchase Order \#" %><br>
-    <%= f.number_field :purchaseorder_id %>
+    <%= f.label :purchaseorder_id, "PO \#" %><br>
+    <%#= f.number_field :purchaseorder_id %>
+    <% if !@rail_car_new %>
+      <%= f.select(:purchaseorder_id, options_for_select(@po_array)) %>
+    <% else %>
+      <%#= f.select(:purchaseorder_id, options_for_select(purchase_orders)) %>
+      <%= f.select(:purchaseorder_id, options_for_select(["Not Assigned"]+ @po_array)) %>
+    <% end %>
   </div>
+
   <div class="field">
     <%= f.label :arrival_dt_elk_city, "Arrival Date Elk City" %><br>
     <%= f.date_select :arrival_dt_elk_city %>

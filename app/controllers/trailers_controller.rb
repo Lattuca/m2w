@@ -12,10 +12,10 @@ class TrailersController < ApplicationController
     @trailers = Trailer.all
   end
 
-  def load_po_array
+  #def load_po_array
     #puts "ccccccccccccccccccccccccccccccccccccccccccccccccc PO Loading Array"
-    @po_array = PurchaseOrder.where("remaining_weight_lbs > ?",100 ).map { |po_array| [po_array.po_nbr, po_array.id] }
-  end
+  #  @po_array = PurchaseOrder.where("remaining_weight_lbs > ?",100 ).map { |po_array| [po_array.po_nbr, po_array.id] }
+  #end
   # GET /trailers/1
   # GET /trailers/1.json
   def show
@@ -133,7 +133,7 @@ class TrailersController < ApplicationController
        else
          puts "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz"
          puts "Remaining Weight cannot be less than 0"
-         @purchase_order.remaining_weight_tons = 0
+         #@purchase_order.remaining_weight_tons = 0
        end
 
      else
