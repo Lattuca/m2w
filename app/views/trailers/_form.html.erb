@@ -11,7 +11,7 @@
     </div>
   <% end %>
   <div class="field">
-    <%= f.label :trailer_nbr %><br>
+    <%= f.label :trailer_nbr, "Trailer \#" %><br>
     <%= f.text_field :trailer_nbr %>
   </div>
   <div class="field">
@@ -27,23 +27,23 @@
     <%= f.date_select :date_shipped %>
   </div>
   <div class="field">
-    <%= f.label :bol_nbr %><br>
+    <%= f.label :bol_nbr, "BOL \#" %><br>
     <%= f.number_field :bol_nbr %>
   </div>
   <div class="field">
     <%= f.label :time_in %><br>
-    <%= f.date_select :time_in %>
+    <%= f.datetime_select :time_in %>
   </div>
   <div class="field">
     <%= f.label :time_out %><br>
-    <%= f.date_select :time_out %>
+    <%= f.datetime_select :time_out %>
   </div>
   <div class="field">
-    <%= f.label :time_taken_number %><br>
-    <%= f.text_field :time_taken_number %>
+    <%= f.label :time_taken_number, "Duration" %><br>
+    <%= f.text_field :time_taken_number, disabled: true %>
   </div>
   <div class="field">
-    <%= f.label :railcar_nbr %><br>
+    <%= f.label :railcar_nbr, "Rail Car \#" %><br>
     <%= f.text_field :railcar_nbr %>
   </div>
   <div class="field">

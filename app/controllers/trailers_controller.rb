@@ -19,6 +19,9 @@ class TrailersController < ApplicationController
   # GET /trailers/1
   # GET /trailers/1.json
   def show
+    @date_component= Time.diff(@trailer.time_out, @trailer.time_in,'%y, %M, %w, %d and %h:%m:%s')
+    @trailer.time_taken_number = @date_component[:diff].to_s
+
     # load the PO information to display po #
     if @trailer.purchaseorder_id !=0
        @trailer_po = PurchaseOrder.find(@trailer.purchaseorder_id)
@@ -28,6 +31,8 @@ class TrailersController < ApplicationController
        @trailer_po_nf = true
      end
   end
+
+
   # GET /trailers/new
   def new
     #puts "44444444444444444444444 new load po array"
@@ -39,13 +44,14 @@ class TrailersController < ApplicationController
 
   # GET /trailers/1/edit
   def edit
-    #@purchase_orders = PurchaseOrder.list_for_select_po
     if @trailer.purchaseorder_id !=0
       @trailer_new = false
     else
       @trailer_new = true
     end
     load_po_array
+    @date_component= Time.diff(@trailer.time_out, @trailer.time_in,'%y, %M, %w, %d and %h:%m:%s')
+    @trailer.time_taken_number = @date_component[:diff].to_s
   end
 
   # POST /trailers
@@ -57,6 +63,8 @@ class TrailersController < ApplicationController
     #@purchase_orders = PurchaseOrder.list_for_select_po
     @trailer.added_by = @user_full_name
     @trailer.changed_by = @user_full_name
+
+
     respond_to do |format|
       if @trailer.save
         format.html { redirect_to @trailer, notice: 'Trailer was successfully created.' }
@@ -76,12 +84,15 @@ class TrailersController < ApplicationController
   # PATCH/PUT /trailers/1.json
   def update
     @trailer.changed_by = @user_full_name
-    #@purchase_orders = PurchaseOrder.list_for_select_po
-
     # update purchase order remaining weight  less what is the weight on the trailer (tons)
+    load_po_array
+
 
 
     respond_to do |format|
+      # Calculate duration
+      @date_component= Time.diff(@trailer.time_out, @trailer.time_in,'%y, %M, %w, %d and %h:%m:%s')
+      @trailer.time_taken_number = @date_component[:diff].to_s
       if @trailer.update(trailer_params)
         format.html { redirect_to @trailer, notice: 'Trailer was successfully updated.' }
         format.json { render :show, status: :ok, location: @trailer }

@@ -93,7 +93,7 @@ class RailCarsController < ApplicationController
       # update the PO remaing weight on the PO
       #puts"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb update trailer purchase id"
       #puts @trailer.purchaseorder_id.to_s
-      update_po_remaining_tons(@rail_car.purchaseorder_id)
+      #update_po_remaining_tons(@rail_car.purchaseorder_id)
     end
   end
 

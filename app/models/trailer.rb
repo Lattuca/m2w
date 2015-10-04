@@ -20,6 +20,8 @@ class Trailer < ActiveRecord::Base
   validates :bol_nbr, presence: true
   validates_numericality_of :bol_nbr, :greater_than_or_equal_to => 10000000, :less_than_or_equal_to => 10000000000, :message =>  "needs to be between 8-10 digits"
   validates :weight_tons, presence: true
+  validates :time_in, date:  { before_or_equal_to: :time_out }
+  before_create :calculate_weight_in_lbs
 
   # Documents validations
 
@@ -41,7 +43,7 @@ class Trailer < ActiveRecord::Base
   before_post_process :doc
 
   def calculate_weight_in_lbs
-    self.weight_lbs = (weight_tons * 2206.7).round(-1)
+    self.weight_lbs = (weight_tons * 2206.7).to_i.round(-1)
   end
 
 end
