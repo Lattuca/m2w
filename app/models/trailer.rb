@@ -1,5 +1,6 @@
 class Trailer < ActiveRecord::Base
   require 'aws-sdk'
+  require 'm2w.rb'
   belongs_to :purchase_order
 
   has_attached_file :doc,
@@ -19,9 +20,9 @@ class Trailer < ActiveRecord::Base
   validates :driver_name, presence: true
   validates :bol_nbr, presence: true
   validates_numericality_of :bol_nbr, :greater_than_or_equal_to => 10000000, :less_than_or_equal_to => 10000000000, :message =>  "needs to be between 8-10 digits"
-  validates :weight_tons, presence: true
+  validates :weight_lbs, presence: true
   validates :time_in, date:  { before_or_equal_to: :time_out }
-  before_create :calculate_weight_in_lbs
+  before_save :calculate_weight_in_tons
 
   # Documents validations
 
@@ -42,8 +43,8 @@ class Trailer < ActiveRecord::Base
 
   before_post_process :doc
 
-  def calculate_weight_in_lbs
-    self.weight_lbs = (weight_tons * 2206.7).to_i.round(-1)
+  def calculate_weight_in_tons
+    self.weight_tons = cvt_lbs_to_tons(weight_lbs)
   end
 
 end

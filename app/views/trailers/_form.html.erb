@@ -51,8 +51,8 @@
     <%= f.text_field :worker %>
   </div>
   <div class="field">
-    <%= f.label :weight_tons %><br>
-    <%= f.number_field :weight_tons %>
+    <%= f.label :weight_lbs, "Weight Lbs" %><br>
+    <%= f.number_field number_with_delimiter(:weight_lbs) %>
   </div>
   <div class="field">
     <%= f.label :purchase_order, "PO \#: " %>

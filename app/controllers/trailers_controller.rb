@@ -1,7 +1,7 @@
 class TrailersController < ApplicationController
   before_action :authorize
   before_action :set_trailer, only: [:show, :edit, :update, :destroy]
-
+  require 'm2w.rb'
   #@purchaseorders = PurchaseOrder.list_for_select_po
 
 
@@ -39,6 +39,7 @@ class TrailersController < ApplicationController
     load_po_array
     @trailer_new = true
     @trailer = Trailer.new
+    @prev_trailer_weight_lbs = -1
   end
 
 
@@ -46,8 +47,10 @@ class TrailersController < ApplicationController
   def edit
     if @trailer.purchaseorder_id !=0
       @trailer_new = false
+      @prev_trailer_weight_lbs = @trailer.weight_lbs
     else
       @trailer_new = true
+      @prev_trailer_weight_lbs = -1 # flag first time
     end
     load_po_array
     @date_component= Time.diff(@trailer.time_out, @trailer.time_in,'%y, %M, %w, %d and %h:%m:%s')
@@ -63,7 +66,7 @@ class TrailersController < ApplicationController
     #@purchase_orders = PurchaseOrder.list_for_select_po
     @trailer.added_by = @user_full_name
     @trailer.changed_by = @user_full_name
-
+    @prev_trailer_weight_lbs = -1
 
     respond_to do |format|
       if @trailer.save
@@ -76,7 +79,8 @@ class TrailersController < ApplicationController
       # update the PO remaing weight on the PO
       #puts"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb new trailer purchase id"
       #puts @trailer.purchaseorder_id.to_s
-      update_po_remaining_tons(@trailer.purchaseorder_id)
+      @prev_trailer_weight_lbs = -1
+      update_po_remaining_lbs(@trailer.purchaseorder_id, @prev_trailer_weight_lbs)
     end
   end
 
@@ -93,6 +97,13 @@ class TrailersController < ApplicationController
       # Calculate duration
       @date_component= Time.diff(@trailer.time_out, @trailer.time_in,'%y, %M, %w, %d and %h:%m:%s')
       @trailer.time_taken_number = @date_component[:diff].to_s
+      if @trailer.purchaseorder_id == 0
+        @prev_trailer_weight_lbs = -1 # case where PO was not previously assigned
+      else
+        @prev_trailer_weight_lbs = @trailer.weight_lbs
+      end
+      @trailer.weight_tons = cvt_lbs_to_tons(@trailer.weight_lbs)
+
       if @trailer.update(trailer_params)
         format.html { redirect_to @trailer, notice: 'Trailer was successfully updated.' }
         format.json { render :show, status: :ok, location: @trailer }
@@ -103,7 +114,8 @@ class TrailersController < ApplicationController
       # update the PO remaing weight on the PO
       #puts"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb update trailer purchase id"
       #puts @trailer.purchaseorder_id.to_s
-      update_po_remaining_tons(@trailer.purchaseorder_id)
+
+      update_po_remaining_lbs(@trailer.purchaseorder_id, @prev_trailer_weight_lbs)
     end
   end
 
@@ -117,28 +129,26 @@ class TrailersController < ApplicationController
     end
   end
 
-  #def connect_po
-  #  fail
-  #  trailer = Trailer.find(params[:id])
-  #  purchase_order = PurchaseOrder.find(params[:id])
-  #  trailer.purchaseorder_id = purchase_order
-  #  trailer.save
-  #  redirect_to trailer_path(trailer)
-  #end
+  # function to update remaining weight tons
+  def update_po_remaining_lbs(po_id, prev_trailer_weight_lbs)
+    puts "****************************************in update po trailer purchase id"
+    puts po_id.to_s, prev_trailer_weight_lbs, @trailer.weight_lbs
 
-  def update_po_remaining_tons(po_id)
-   return if po_id == 0 # exit if empty
-    # function to update remaining weight tons
+    return if (po_id == 0 || prev_trailer_weight_lbs == @trailer.weight_lbs)  # exit if empty OR weight has not changed
+    puts "passed the test"
 
-    #puts "****************************************in update po trailer purchase id"
-    #puts po_id.to_s
+    prev_trailer_weight_lbs = 0 if prev_trailer_weight_lbs == -1
+
     if @purchase_order = PurchaseOrder.find(po_id)
-       @remaining_tons = @purchase_order.remaining_weight_tons - @trailer.weight_tons
-       if @remaining_tons >= 0
-         @purchase_order.remaining_weight_tons = @remaining_tons
-         @purchase_order.remaining_weight_lbs =  (@remaining_tons * 2206.7).to_i.round(-1)
-         #puts ".........................................po.remaining weight"
-         #puts   @purchase_order.remaining_weight_tons,@purchase_order.po_nbr.to_s,@purchase_order.id.to_s
+
+      # user changed the weight in lbs..so lets add the previous verion to the PO and subtract the new weight value
+       puts "sssssssssssssssssssssssssssssssssssssssss purchase order found", po_id
+       @remaining_lbs = @purchase_order.remaining_weight_lbs - @trailer.weight_lbs + prev_trailer_weight_lbs
+       if @remaining_lbs >= 0
+         @purchase_order.remaining_weight_lbs =  @remaining_lbs
+         @purchase_order.remaining_weight_tons = cvt_lbs_to_tons(@remaining_lbs)
+         puts ".........................................po.remaining weight"
+         puts   @purchase_order.remaining_weight_tons, @purchase_order.remaining_weight_lbs,@purchase_order.po_nbr.to_s
          @purchase_order.save
          #puts "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx PO SAVED",po_id.to_s
        else
@@ -146,10 +156,9 @@ class TrailersController < ApplicationController
          puts "Remaining Weight cannot be less than 0"
          #@purchase_order.remaining_weight_tons = 0
        end
-
      else
-       #puts "........................................."
-       #puts "record not found"
+       puts "........................................."
+       puts "record not found"
        format.html { render :edit }
        format.json { render json: @trailer.errors, status: :unprocessable_entity }
      end

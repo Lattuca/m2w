@@ -26,9 +26,9 @@
         <td><%= purchase_order.id %></td>
         <td><%= purchase_order.po_nbr %> </td>
         <td><%= purchase_order.required_weight_tons %></td>
-        <td><%= purchase_order.calculate_weight_in_lbs %></td>
+        <td><%= number_with_delimiter(purchase_order.required_weight_lbs) %></td>
         <td><%= purchase_order.remaining_weight_tons %></td>
-        <td><%= purchase_order.remaining_weight_lbs %></td>
+        <td><%= number_with_delimiter(purchase_order.remaining_weight_lbs) %></td>
         <% if purchase_order.vendor_id != nil %>
           <td><%= "#{purchase_order.vendor.vendor_name}" %></td>
         <% end %>
@@ -38,7 +38,7 @@
         <td><%= purchase_order.active %></td>
         <td><%= link_to 'Show', purchase_order %></td>
         <td><%= link_to 'Edit', edit_purchase_order_path(purchase_order) %></td>
-        <td><%= link_to 'Destroy', purchase_order, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Delete', purchase_order, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

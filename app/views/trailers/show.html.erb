@@ -37,7 +37,7 @@
 </p>
 
 <p>
-  <strong>Time taken number:</strong>
+  <strong>Duration:</strong>
   <%= @trailer.time_taken_number %>
 </p>
 
@@ -52,12 +52,12 @@
 </p>
 <p>
   <strong>Weight tons:</strong>
-  <%= @trailer.weight_tons %>
+  <%= @trailer.weight_tons.round(2)  %>
 </p>
 
 <p>
   <strong>Weight lbs:</strong>
-  <%= number_with_delimiter(@trailer.calculate_weight_in_lbs)%>
+  <%=number_with_delimiter(@trailer.weight_lbs)%>
 </p>
 
 

@@ -5,7 +5,7 @@ class PurchaseOrdersController < ApplicationController
 
   # GET /purchase_orders
   # GET /purchase_orders.json
-@vendors = Vendor.list_for_select
+  @vendors = Vendor.list_for_select
   def index
     @purchase_orders = PurchaseOrder.all.order(:po_nbr)
   end
@@ -18,8 +18,13 @@ class PurchaseOrdersController < ApplicationController
   # GET /purchase_orders/new
   def new
     @purchase_order = PurchaseOrder.new
+
+    # inititialize weight variables
     @purchase_order.required_weight_tons = 0.00
-    @new_po = true
+    @purchase_order.required_weight_lbs = 0
+
+
+    @new_po = true # let user enter weight for first time only
     @vendors = Vendor.list_for_select
   end
 
@@ -27,7 +32,7 @@ class PurchaseOrdersController < ApplicationController
   def edit
     @vendors = Vendor.list_for_select
     @new_po = false
-      # save the remaining weight tons  in case it got changed
+    # save the remaining weight tons  in case it got changed
     #@purchase_orders = PurchaseOrder.all
     #@prev_remaining_weight_tons = @purchase_order.remaining_weight_tons
     #puts "........................ remaining weight"
@@ -44,7 +49,11 @@ class PurchaseOrdersController < ApplicationController
     @vendors = Vendor.list_for_select
     @purchase_order.added_by = @user_full_name
     @purchase_order.changed_by = @user_full_name
+
+    # set the remaining weight to required weight on record creation
     @purchase_order.remaining_weight_tons = @purchase_order.required_weight_tons
+    @purchase_order.remaining_weight_lbs =  @purchase_order.required_weight_lbs
+    
     #print"zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz:"
     #puts @purchase_order.remaining_weight_tons
     #puts "xxxx"
@@ -103,7 +112,7 @@ class PurchaseOrdersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def purchase_order_params
       params.require(:purchase_order).permit(:required_weight_tons,
-                                              #:remaining_weight_tons,
+                                              :remaining_weight_tons,
                                               :vendor_id,
                                               :well_name,
                                               :sand_grade,

@@ -27,8 +27,10 @@
     <% end %>
   </div>
     <div class="field">
-      <%=f.label :remaining_weight_tons, "Remaining Weight Tons" %>
-      <%=f.number_field :remaining_weight_tons, disabled: true %>
+      <%=f.label :remaining_weight_lbs, "Remaining Weight lbs" %>
+      <%=f.text_field  :remaining_weight_lbs, :class => 'remaining_weight_lbs',
+                        disabled: true,
+                        value: number_with_delimiter(f.object.remaining_weight_lbs) %>
     </div>
     <div class="field">
     <%= f.label :vendor %><br>

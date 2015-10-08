@@ -16,7 +16,7 @@
 
 <p>
   <strong>Required weight lbs:</strong>
-  <%=number_with_delimiter(@purchase_order.calculate_weight_in_lbs) %>
+  <%=number_with_delimiter(@purchase_order.required_weight_lbs) %>
 </p>
 
 <p>
@@ -26,7 +26,7 @@
 
 <p>
   <strong>Remaining weight lbs:</strong>
-  <%= number_with_delimiter(@purchase_order.calculate_remaining_weight_in_lbs) %>
+  <%= number_with_delimiter(@purchase_order.remaining_weight_lbs) %>
 </p>
 
 <p>

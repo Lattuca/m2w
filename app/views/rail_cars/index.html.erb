@@ -42,10 +42,10 @@
         <td><%= rail_car.actual_dep_dt %></td>
         <td><%= rail_car.arrival_dt_onsite %></td>
         <td><%= rail_car.bol_arrival_dt %></td>
-        
+
         <td><%= link_to 'Show', rail_car %></td>
         <td><%= link_to 'Edit', edit_rail_car_path(rail_car) %></td>
-        <td><%= link_to 'Destroy', rail_car, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Delete', rail_car, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
