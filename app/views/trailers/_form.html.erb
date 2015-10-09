@@ -44,7 +44,13 @@
   </div>
   <div class="field">
     <%= f.label :railcar_nbr, "Rail Car \#" %><br>
-    <%= f.text_field :railcar_nbr %>
+    <%#= f.text_field :railcar_nbr %>
+    <% if !@trailer_new %>
+      <%= f.select(:railcar_nbr, options_for_select(@rail_car_array)) %>
+    <% else %>
+      <%#= f.select(:purchaseorder_id, options_for_select(purchase_orders)) %>
+      <%= f.select(:railcar_nbr, options_for_select(["Not Assigned"]+ @rail_car_array)) %>
+    <% end %>
   </div>
   <div class="field">
     <%= f.label :worker %><br>

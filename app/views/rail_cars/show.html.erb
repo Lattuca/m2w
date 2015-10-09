@@ -7,13 +7,13 @@
 </p>
 
 <p>
-  <strong>Weight on Arrival:</strong>
-  <%= number_with_delimiter(@rail_car.wgt_on_arrival) %>
+  <strong>Weight on Arrival Tons:</strong>
+  <%= number_with_delimiter(@rail_car.wgt_on_arrival).to_i %>
 </p>
 
 <p>
-  <strong>Weight at Origin:</strong>
-  <%= number_with_delimiter(@rail_car.wgt_at_origin) %>
+  <strong>Weight at Origin Tons:</strong>
+  <%= number_with_delimiter(@rail_car.wgt_at_origin).to_i %>
 </p>
 
 <p>

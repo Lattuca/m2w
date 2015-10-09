@@ -12,10 +12,7 @@ class TrailersController < ApplicationController
     @trailers = Trailer.all
   end
 
-  #def load_po_array
-    #puts "ccccccccccccccccccccccccccccccccccccccccccccccccc PO Loading Array"
-  #  @po_array = PurchaseOrder.where("remaining_weight_lbs > ?",100 ).map { |po_array| [po_array.po_nbr, po_array.id] }
-  #end
+
   # GET /trailers/1
   # GET /trailers/1.json
   def show
@@ -36,7 +33,8 @@ class TrailersController < ApplicationController
   # GET /trailers/new
   def new
     #puts "44444444444444444444444 new load po array"
-    load_po_array
+    load_po_array # load POs
+    load_rail_car_array # load rails cars
     @trailer_new = true
     @trailer = Trailer.new
     @prev_trailer_weight_lbs = -1
@@ -52,7 +50,8 @@ class TrailersController < ApplicationController
       @trailer_new = true
       @prev_trailer_weight_lbs = -1 # flag first time
     end
-    load_po_array
+    load_po_array# load POs
+    load_rail_car_array # load rails cars
     @date_component= Time.diff(@trailer.time_out, @trailer.time_in,'%y, %M, %w, %d and %h:%m:%s')
     @trailer.time_taken_number = @date_component[:diff].to_s
   end
@@ -60,7 +59,8 @@ class TrailersController < ApplicationController
   # POST /trailers
   # POST /trailers.json
   def create
-    load_po_array
+    load_po_array # load POs
+    load_rail_car_array # load rails cars
     @trailer_new = true
     @trailer = Trailer.new(trailer_params)
     #@purchase_orders = PurchaseOrder.list_for_select_po
@@ -89,7 +89,8 @@ class TrailersController < ApplicationController
   def update
     @trailer.changed_by = @user_full_name
     # update purchase order remaining weight  less what is the weight on the trailer (tons)
-    load_po_array
+    load_po_array # Load POs
+    load_rail_car_array # load rails cars
 
 
 

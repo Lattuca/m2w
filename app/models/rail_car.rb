@@ -2,6 +2,8 @@ class RailCar < ActiveRecord::Base
   require 'aws-sdk'
   belongs_to :purchase_order
   belongs_to :vendor
+  has_many :trailers
+
 
   has_attached_file :doc,
                     :storage => :s3,
@@ -41,4 +43,9 @@ class RailCar < ActiveRecord::Base
 
   before_post_process :doc
 
+  def self.list_for_select_rail_car
+     self.all.map do |rail_car|
+        [rail_car.car_empty, rail_car.id]
+     end
+  end
 end
