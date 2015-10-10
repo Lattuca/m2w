@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151003140539) do
+ActiveRecord::Schema.define(version: 20151010113607) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -63,7 +63,7 @@ ActiveRecord::Schema.define(version: 20151003140539) do
     t.decimal  "wgt_at_origin",                 precision: 5, scale: 2
     t.string   "sand_grade"
     t.boolean  "car_empty"
-    t.integer  "bol_nbr"
+    t.integer  "bol_nbr",             limit: 8
     t.integer  "vendor_id"
     t.integer  "vendor_po_nbr",       limit: 8
     t.boolean  "email_bol"
@@ -84,6 +84,7 @@ ActiveRecord::Schema.define(version: 20151003140539) do
     t.datetime "doc_updated_at"
   end
 
+  add_index "rail_cars", ["car_empty"], name: "index_rail_cars_on_car_empty", using: :btree
   add_index "rail_cars", ["purchaseorder_id"], name: "index_rail_cars_on_purchaseorder_id", using: :btree
   add_index "rail_cars", ["vendor_id"], name: "index_rail_cars_on_vendor_id", using: :btree
 
@@ -100,19 +101,19 @@ ActiveRecord::Schema.define(version: 20151003140539) do
     t.string   "driver_name"
     t.integer  "carrier_id"
     t.date     "date_shipped"
-    t.integer  "bol_nbr"
+    t.integer  "bol_nbr",           limit: 8
     t.datetime "time_in"
     t.datetime "time_out"
     t.string   "time_taken_number"
     t.string   "railcar_nbr"
     t.string   "worker"
     t.integer  "weight_lbs"
-    t.decimal  "weight_tons",       precision: 5, scale: 2
+    t.decimal  "weight_tons",                 precision: 5, scale: 2
     t.integer  "purchaseorder_id"
     t.string   "added_by"
     t.string   "changed_by"
-    t.datetime "created_at",                                null: false
-    t.datetime "updated_at",                                null: false
+    t.datetime "created_at",                                          null: false
+    t.datetime "updated_at",                                          null: false
     t.string   "doc_file_name"
     t.string   "doc_content_type"
     t.integer  "doc_file_size"
