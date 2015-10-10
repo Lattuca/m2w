@@ -15,12 +15,13 @@
     <%= f.text_field :trailer_nbr %>
   </div>
   <div class="field">
-    <%= f.label :driver_name %><br>
+    <%= f.label :driver_name, "Driver Name" %><br>
     <%= f.text_field :driver_name %>
   </div>
   <div class="field">
-    <%= f.label :carrier_id %><br>
-    <%= f.number_field :carrier_id %>
+    <%= f.label :carrier_id, "Carrier Name" %><br>
+    <%#= f.number_field :carrier_id %>
+    <%= f.select(:carrier_id, options_for_select(@carrier_array)) %>
   </div>
   <div class="field">
     <%= f.label :date_shipped %><br>
@@ -58,7 +59,8 @@
   </div>
   <div class="field">
     <%= f.label :weight_lbs, "Weight Lbs" %><br>
-    <%= f.number_field number_with_delimiter(:weight_lbs) %>
+    <%#= f.number_field number_with_delimiter(:weight_lbs) %>
+    <%= f.number_field :weight_lbs %>
   </div>
   <div class="field">
     <%= f.label :purchase_order, "PO \#: " %>

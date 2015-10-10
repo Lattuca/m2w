@@ -3,6 +3,7 @@ class Trailer < ActiveRecord::Base
   require 'm2w.rb'
   belongs_to :purchase_order
 
+
   has_attached_file :doc,
                     :storage => :s3,
                     :bucket => ENV['S3_BUCKET_NAME'],

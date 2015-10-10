@@ -2,27 +2,34 @@
 
 <h2> Trailer Details </h2>
 <p>
-  <strong>Trailer nbr:</strong>
+  <strong>Trailer #:</strong>
   <%= @trailer.trailer_nbr %>
 </p>
 
 <p>
-  <strong>Driver name:</strong>
+  <strong>Driver Name:</strong>
   <%= @trailer.driver_name %>
 </p>
 
 <p>
-  <strong>Carrier id:</strong>
-  <%= @trailer.carrier_id %>
+  <strong>Carrier Name:</strong>
+  <%#= @trailer.carrier_id %>
+  <% if @trailer_carrier_nf %>
+     <%= "Carrier Not Found" %>
+  <% else %>
+     <%= @trailer_carrier.carrier_name %>
+     <strong> Carrier Id: </strong>
+     <%= @trailer_carrier.id %>
+  <% end %>
 </p>
 
 <p>
-  <strong>Date shipped:</strong>
+  <strong>Date Shipped:</strong>
   <%= @trailer.date_shipped %>
 </p>
 
 <p>
-  <strong>Bol nbr:</strong>
+  <strong>BOL #:</strong>
   <%= @trailer.bol_nbr %>
 </p>
 
@@ -42,7 +49,7 @@
 </p>
 
 <p>
-  <strong>Railcar nbr:</strong>
+  <strong>Rail Car #:</strong>
   <%= @trailer.railcar_nbr %>
 </p>
 

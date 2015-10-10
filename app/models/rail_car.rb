@@ -3,6 +3,7 @@ class RailCar < ActiveRecord::Base
   belongs_to :purchase_order
   belongs_to :vendor
   has_many :trailers
+  belongs_to :carrier
 
 
   has_attached_file :doc,

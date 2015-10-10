@@ -13,8 +13,13 @@
 
   <div class="field">
     <%=f.label :po_nbr, "PO \#" %>
-    <%=f.number_field :po_nbr %><br>
+    <%=f.number_field :po_nbr %>
   </div>
+  <div class="field">
+    <%= f.label :well_name,"Well Name" %><br>
+    <%= f.text_field :well_name %>
+  </div>
+
    <div class="field">
     <%= f.label :required_weight_tons, "Required Weight Tons  " %>
     <% if   !@new_po %>
@@ -38,10 +43,7 @@
       <%= f.select(:vendor_id, options_for_select(vendors)) %>
     <% end %>
   </div>
-  <div class="field">
-    <%= f.label :well_name,"Well Name" %><br>
-    <%= f.text_field :well_name %>
-  </div>
+
   <div class="field">
     <%= f.label :sand_grade,"Sand Grade" %><br>
     <%= f.select :sand_grade, ['40/70m', '100m']%>

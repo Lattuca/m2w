@@ -130,8 +130,8 @@ class RailCarsController < ApplicationController
        end
 
      else
-       #puts "........................................."
-       #puts "record not found"
+       puts "........................................."
+       puts "PO not found",po_id
        format.html { render :edit }
        format.json { render json: @trailer.errors, status: :unprocessable_entity }
      end

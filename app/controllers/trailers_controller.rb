@@ -18,16 +18,25 @@ class TrailersController < ApplicationController
   def show
     @date_component= Time.diff(@trailer.time_out, @trailer.time_in,'%y, %M, %w, %d and %h:%m:%s')
     @trailer.time_taken_number = @date_component[:diff].to_s
+    #load_carrier_array # load carriers for drop down select
 
     # load the PO information to display po #
     if @trailer.purchaseorder_id !=0
-       @trailer_po = PurchaseOrder.find(@trailer.purchaseorder_id)
-       @trailer_po_nf = false
-     else
-       # set to 0 for the Show screen
-       @trailer_po_nf = true
-     end
-  end
+      @trailer_po = PurchaseOrder.find(@trailer.purchaseorder_id)
+      @trailer_po_nf = false
+    else
+      # set to 0 for the Show screen
+      @trailer_po_nf = true
+    end
+
+   # load the Carrier information for display
+   if @trailer.carrier_id !=0
+      @trailer_carrier = Carrier.find(@trailer.carrier_id )
+      @trailer_carrier_nf = false
+   else
+      @trailer_carrier_nf = true
+   end
+ end
 
 
   # GET /trailers/new
@@ -35,6 +44,7 @@ class TrailersController < ApplicationController
     #puts "44444444444444444444444 new load po array"
     load_po_array # load POs
     load_rail_car_array # load rails cars
+    load_carrier_array # load carriers for drop down select
     @trailer_new = true
     @trailer = Trailer.new
     @prev_trailer_weight_lbs = -1
@@ -50,8 +60,11 @@ class TrailersController < ApplicationController
       @trailer_new = true
       @prev_trailer_weight_lbs = -1 # flag first time
     end
-    load_po_array# load POs
+
+    # load arrays for drop down selections
+    load_po_array # load POs
     load_rail_car_array # load rails cars
+    load_carrier_array # load carriers for drop down select
     @date_component= Time.diff(@trailer.time_out, @trailer.time_in,'%y, %M, %w, %d and %h:%m:%s')
     @trailer.time_taken_number = @date_component[:diff].to_s
   end
@@ -61,6 +74,7 @@ class TrailersController < ApplicationController
   def create
     load_po_array # load POs
     load_rail_car_array # load rails cars
+    load_carrier_array # load carriers for drop down select
     @trailer_new = true
     @trailer = Trailer.new(trailer_params)
     #@purchase_orders = PurchaseOrder.list_for_select_po
@@ -91,6 +105,7 @@ class TrailersController < ApplicationController
     # update purchase order remaining weight  less what is the weight on the trailer (tons)
     load_po_array # Load POs
     load_rail_car_array # load rails cars
+    load_carrier_array # load carriers for drop down select
 
 
 
@@ -103,7 +118,8 @@ class TrailersController < ApplicationController
       else
         @prev_trailer_weight_lbs = @trailer.weight_lbs
       end
-      @trailer.weight_tons = cvt_lbs_to_tons(@trailer.weight_lbs)
+      #puts "wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww",@trailer.weight_lbs
+      #@trailer.weight_tons = cvt_lbs_to_tons(@trailer.weight_lbs)
 
       if @trailer.update(trailer_params)
         format.html { redirect_to @trailer, notice: 'Trailer was successfully updated.' }
@@ -132,24 +148,24 @@ class TrailersController < ApplicationController
 
   # function to update remaining weight tons
   def update_po_remaining_lbs(po_id, prev_trailer_weight_lbs)
-    puts "****************************************in update po trailer purchase id"
-    puts po_id.to_s, prev_trailer_weight_lbs, @trailer.weight_lbs
+    #puts "****************************************in update po trailer purchase id"
+    #puts po_id.to_s, prev_trailer_weight_lbs, @trailer.weight_lbs
 
     return if (po_id == 0 || prev_trailer_weight_lbs == @trailer.weight_lbs)  # exit if empty OR weight has not changed
-    puts "passed the test"
+    #puts "passed the test"
 
     prev_trailer_weight_lbs = 0 if prev_trailer_weight_lbs == -1
 
     if @purchase_order = PurchaseOrder.find(po_id)
 
       # user changed the weight in lbs..so lets add the previous verion to the PO and subtract the new weight value
-       puts "sssssssssssssssssssssssssssssssssssssssss purchase order found", po_id
+       #puts "sssssssssssssssssssssssssssssssssssssssss purchase order found", po_id
        @remaining_lbs = @purchase_order.remaining_weight_lbs - @trailer.weight_lbs + prev_trailer_weight_lbs
        if @remaining_lbs >= 0
          @purchase_order.remaining_weight_lbs =  @remaining_lbs
          @purchase_order.remaining_weight_tons = cvt_lbs_to_tons(@remaining_lbs)
-         puts ".........................................po.remaining weight"
-         puts   @purchase_order.remaining_weight_tons, @purchase_order.remaining_weight_lbs,@purchase_order.po_nbr.to_s
+         #puts ".........................................po.remaining weight"
+         #puts   @purchase_order.remaining_weight_tons, @purchase_order.remaining_weight_lbs,@purchase_order.po_nbr.to_s
          @purchase_order.save
          #puts "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx PO SAVED",po_id.to_s
        else
@@ -159,7 +175,7 @@ class TrailersController < ApplicationController
        end
      else
        puts "........................................."
-       puts "record not found"
+       puts "purchase order not found",po_id
        format.html { render :edit }
        format.json { render json: @trailer.errors, status: :unprocessable_entity }
      end
