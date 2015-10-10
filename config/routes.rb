@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :workers
   get 'm2w' => 'm2w#index'
   controller :sessions do
     get 'login' => :new

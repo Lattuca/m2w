@@ -47,15 +47,19 @@
     <%= f.label :railcar_nbr, "Rail Car \#" %><br>
     <%#= f.text_field :railcar_nbr %>
     <% if !@trailer_new %>
-      <%= f.select(:railcar_nbr, options_for_select(@rail_car_array)) %>
+      <%= f.select(:railcar_nbr, options_for_select(@rail_car_array,@trailer.badge_nbr)) %>
     <% else %>
       <%#= f.select(:purchaseorder_id, options_for_select(purchase_orders)) %>
       <%= f.select(:railcar_nbr, options_for_select(["Not Assigned"]+ @rail_car_array)) %>
     <% end %>
   </div>
   <div class="field">
-    <%= f.label :worker %><br>
-    <%= f.text_field :worker %>
+    <%= f.label :badge_nbr, "Worker" %><br>
+    <% if :badge_nbr !=0 %>
+        <%= f.select(:badge_nbr, options_for_select(@worker_array)) %>
+    <% else %>
+        <%= f.select(:badge_nbr, options_for_select(["Not Assigned"]+ @worker_array)) %>
+    <% end %>
   </div>
   <div class="field">
     <%= f.label :weight_lbs, "Weight Lbs" %><br>

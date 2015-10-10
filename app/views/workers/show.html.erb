@@ -1,0 +1,74 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Badge #:</strong>
+  <%= @worker.badge_nbr %>
+</p>
+
+<p>
+  <strong>Effective Date:</strong>
+  <%= @worker.effective_date %>
+</p>
+
+<p>
+  <strong>Active:</strong>
+  <%= @worker.active %>
+</p>
+
+<p>
+  <strong>First Name:</strong>
+  <%= @worker.first_name %>
+</p>
+
+<p>
+  <strong>Last Name:</strong>
+  <%= @worker.last_name %>
+</p>
+
+<p>
+  <strong>Address line 1:</strong>
+  <%= @worker.address_line_1 %>
+</p>
+
+<p>
+  <strong>Address line 2:</strong>
+  <%= @worker.address_line_2 %>
+</p>
+
+<p>
+  <strong>City:</strong>
+  <%= @worker.city_name %>
+</p>
+
+<p>
+  <strong>State:</strong>
+  <%= @worker.state_code %>
+</p>
+
+<p>
+  <strong>ZIP:</strong>
+  <%= @worker.zip_code %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @worker.email %>
+</p>
+
+<p>
+  <strong>Added by:</strong>
+  <%= @worker.added_by %>
+</p>
+
+<p>
+  <strong>Changed by:</strong>
+  <%= @worker.changed_by %>
+</p>
+
+<p>
+  <strong>Comments:</strong>
+  <%= @worker.comments %>
+</p>
+
+<%= link_to 'Edit', edit_worker_path(@worker) %> |
+<%= link_to 'Back', workers_path %>

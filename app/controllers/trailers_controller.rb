@@ -18,7 +18,7 @@ class TrailersController < ApplicationController
   def show
     @date_component= Time.diff(@trailer.time_out, @trailer.time_in,'%y, %M, %w, %d and %h:%m:%s')
     @trailer.time_taken_number = @date_component[:diff].to_s
-    #load_carrier_array # load carriers for drop down select
+
 
     # load the PO information to display po #
     if @trailer.purchaseorder_id !=0
@@ -29,22 +29,30 @@ class TrailersController < ApplicationController
       @trailer_po_nf = true
     end
 
-   # load the Carrier information for display
-   if @trailer.carrier_id !=0
+    # load the Carrier information for display
+    if @trailer.carrier_id !=0
       @trailer_carrier = Carrier.find(@trailer.carrier_id )
       @trailer_carrier_nf = false
-   else
+    else
       @trailer_carrier_nf = true
+    end
+
+    # load the Worker information for display
+    if @trailer.badge_nbr !=0
+      @trailer_worker = Worker.where(badge_nbr: @trailer.badge_nbr).take
+      @trailer_worker_nf = false
+   else
+     @trailer_worker_nf = true
    end
- end
+  end
+
 
 
   # GET /trailers/new
   def new
-    #puts "44444444444444444444444 new load po array"
-    load_po_array # load POs
-    load_rail_car_array # load rails cars
-    load_carrier_array # load carriers for drop down select
+    # load arrys for dropdown selection
+    load_all_arrays
+
     @trailer_new = true
     @trailer = Trailer.new
     @prev_trailer_weight_lbs = -1
@@ -61,10 +69,10 @@ class TrailersController < ApplicationController
       @prev_trailer_weight_lbs = -1 # flag first time
     end
 
+
     # load arrays for drop down selections
-    load_po_array # load POs
-    load_rail_car_array # load rails cars
-    load_carrier_array # load carriers for drop down select
+    load_all_arrays
+
     @date_component= Time.diff(@trailer.time_out, @trailer.time_in,'%y, %M, %w, %d and %h:%m:%s')
     @trailer.time_taken_number = @date_component[:diff].to_s
   end
@@ -72,9 +80,8 @@ class TrailersController < ApplicationController
   # POST /trailers
   # POST /trailers.json
   def create
-    load_po_array # load POs
-    load_rail_car_array # load rails cars
-    load_carrier_array # load carriers for drop down select
+    load_all_arrays
+
     @trailer_new = true
     @trailer = Trailer.new(trailer_params)
     #@purchase_orders = PurchaseOrder.list_for_select_po
@@ -103,10 +110,8 @@ class TrailersController < ApplicationController
   def update
     @trailer.changed_by = @user_full_name
     # update purchase order remaining weight  less what is the weight on the trailer (tons)
-    load_po_array # Load POs
-    load_rail_car_array # load rails cars
-    load_carrier_array # load carriers for drop down select
 
+    load_all_arrays
 
 
     respond_to do |format|
@@ -141,7 +146,7 @@ class TrailersController < ApplicationController
   def destroy
     @trailer.destroy
     respond_to do |format|
-      format.html { redirect_to trailers_url, notice: 'Trailer was successfully destroyed.' }
+      format.html { redirect_to trailers_url, notice: 'Trailer was successfully deleted.' }
       format.json { head :no_content }
     end
   end
@@ -191,7 +196,7 @@ class TrailersController < ApplicationController
     def trailer_params
       params.require(:trailer).permit(:trailer_nbr, :driver_name, :carrier_id,
                                       :date_shipped, :bol_nbr, :time_in, :time_out,
-                                      :time_taken_number, :railcar_nbr, :worker,
+                                      :time_taken_number, :railcar_nbr, :badge_nbr,
                                       :weight_lbs, :weight_tons, :purchaseorder_id,
                                       :doc, :doc_file_name, :doc_file_size,
                                       :doc_content_type, :doc_comment, :doc_updated_at

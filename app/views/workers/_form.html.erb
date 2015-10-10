@@ -1,0 +1,67 @@
+<%= form_for(@worker) do |f| %>
+  <% if @worker.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@worker.errors.count, "error") %> prohibited this worker from being saved:</h2>
+
+      <ul>
+      <% @worker.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :badge_nbr, "Badge \#" %><br>
+    <%= f.number_field :badge_nbr %>
+  </div>
+  <div class="field">
+    <%= f.label :effective_date, "Effective Date" %><br>
+    <%= f.date_select :effective_date %>
+  </div>
+  <div class="field">
+    <%= f.label :active %><br>
+    <%= f.check_box :active %>
+  </div>
+  <div class="field">
+    <%= f.label :first_name, "First Name" %><br>
+    <%= f.text_field :first_name %>
+  </div>
+  <div class="field">
+    <%= f.label :last_name, "Last Name" %><br>
+    <%= f.text_field :last_name %>
+  </div>
+  <div class="field">
+    <%= f.label :address_line_1, "Address line 1"%><br>
+    <%= f.text_field :address_line_1 %>
+  </div>
+  <div class="field">
+    <%= f.label :address_line_2, "Address Line 2" %><br>
+    <%= f.text_field :address_line_2 %>
+  </div>
+  <div class="field">
+    <%= f.label :city_name, "City" %><br>
+    <%= f.text_field :city_name %>
+  </div>
+  <div class="field">
+    <%= f.label :state_code, "State" %><br>
+    <% if :state_code != nil %>
+      <%= f.select(:state_code, options_for_select(us_states,@worker.state_code)) %>
+    <% end %>
+  </div>
+  <div class="field">
+    <%= f.label :zip_code, "ZIP" %><br>
+    <%= f.number_field :zip_code %>
+  </div>
+  <div class="field">
+    <%= f.label :email %><br>
+    <%= f.text_field :email %>
+  </div>
+  <div class="field">
+    <%= f.label :comments %><br>
+    <%= f.text_area :comments %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

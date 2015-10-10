@@ -1,0 +1,33 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  badge_nbr: 1
+  effective_date: 2015-10-10
+  active: false
+  first_name: MyString
+  last_name: MyString
+  address_line_1: MyString
+  address_line_2: MyString
+  city_name: MyString
+  state_code: MyString
+  zip_code: 1
+  email: MyString
+  added_by: MyString
+  changed_by: MyString
+  comments: MyText
+
+two:
+  badge_nbr: 1
+  effective_date: 2015-10-10
+  active: false
+  first_name: MyString
+  last_name: MyString
+  address_line_1: MyString
+  address_line_2: MyString
+  city_name: MyString
+  state_code: MyString
+  zip_code: 1
+  email: MyString
+  added_by: MyString
+  changed_by: MyString
+  comments: MyText

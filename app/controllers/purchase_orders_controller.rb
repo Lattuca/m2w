@@ -53,7 +53,7 @@ class PurchaseOrdersController < ApplicationController
     # set the remaining weight to required weight on record creation
     @purchase_order.remaining_weight_tons = @purchase_order.required_weight_tons
     @purchase_order.remaining_weight_lbs =  @purchase_order.required_weight_lbs
-    
+
     #print"zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz:"
     #puts @purchase_order.remaining_weight_tons
     #puts "xxxx"
@@ -95,7 +95,7 @@ class PurchaseOrdersController < ApplicationController
   def destroy
     @purchase_order.destroy
     respond_to do |format|
-      format.html { redirect_to purchase_orders_url, notice: 'Purchase order was successfully destroyed.' }
+      format.html { redirect_to purchase_orders_url, notice: 'Purchase order was successfully deleted.' }
       format.json { head :no_content }
     end
   end

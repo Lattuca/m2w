@@ -57,7 +57,7 @@ class UserAccessLevelsController < ApplicationController
   def destroy
     @user_access_level.destroy
     respond_to do |format|
-      format.html { redirect_to user_access_levels_url, notice: 'User access level was successfully destroyed.' }
+      format.html { redirect_to user_access_levels_url, notice: 'User access level was successfully deleted.' }
       format.json { head :no_content }
     end
   end

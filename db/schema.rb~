@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151010155950) do
+ActiveRecord::Schema.define(version: 20151010140953) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -106,6 +106,7 @@ ActiveRecord::Schema.define(version: 20151010155950) do
     t.datetime "time_out"
     t.string   "time_taken_number"
     t.string   "railcar_nbr"
+    t.string   "worker"
     t.integer  "weight_lbs"
     t.decimal  "weight_tons",                 precision: 5, scale: 2
     t.integer  "purchaseorder_id"
@@ -119,7 +120,6 @@ ActiveRecord::Schema.define(version: 20151010155950) do
     t.text     "doc_comment"
     t.datetime "doc_updated_at"
     t.integer  "carriers_id"
-    t.integer  "badge_nbr"
   end
 
   add_index "trailers", ["carriers_id"], name: "index_trailers_on_carriers_id", using: :btree
