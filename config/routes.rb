@@ -29,7 +29,9 @@ Rails.application.routes.draw do
   root 'm2w#index'
   get '*path' => redirect('/')
 
+  match 'active'  => 'sessions#active',  via: :get
 
+  match 'timeout' => 'sessions#timeout', via: :get
 
 
 

@@ -10,7 +10,7 @@ default: &default
   pool: 5
   timeout: 5000
   username: carmelo
-  password: cl201812
+  #password: cl201812
   host: localhost
   port: 5432
 

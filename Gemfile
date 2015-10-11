@@ -49,6 +49,8 @@ gem 'aws-sdk', '< 2.0'
 gem 'date_validator'
 gem 'time_diff'
 
+# add gem for timeout
+gem 'auto-session-timeout'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

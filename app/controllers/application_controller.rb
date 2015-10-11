@@ -1,10 +1,14 @@
 class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
+  #  time out sessions
+  auto_session_timeout 5.minutes
+
   protect_from_forgery with: :exception
 
   # load global functions
   require 'm2w'
+
 
   before_action :authorize
 
